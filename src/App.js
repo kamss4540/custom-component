@@ -1,9 +1,9 @@
-import FeaturedApplication from "./FeaturedApplication";
+import Com from "./SmartCenter";
 
-const data = [{}, {}, {}];
+const data = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 function App() {
-  return <FeaturedApplication data={data} />;
+  return <Com data={data} />;
 }
 
 export default App;
