@@ -31,7 +31,7 @@ const SmartCenter = (props) => {
             styles["num_" + active.imgs.length]
           } `}
         >
-          {active.imgs.map((item, index) => (
+          {active.imgs.map((item) => (
             <div key={item.url} onClick={() => onNameClick(item)}>
               <img src={item.url} alt="" />
               <span>{item.name}</span>
@@ -52,6 +52,9 @@ const SmartCenter = (props) => {
           ))}
         </div>
       </div>
+      <div style={{ display: "none" }}>
+        {btnlist.map((i) => i.imgs.map((j) => <img src={j.url} alt="" />))}
+      </div>
     </div>
   );
 };
@@ -66,6 +69,7 @@ const btnlist = [
         name: "精准治气主页",
         url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/精准治气.png",
         event: "goToPreciseAir",
+        data: { target: "_blank" },
       },
       {
         name: "大气预测预警",
@@ -74,16 +78,16 @@ const btnlist = [
         data: "dqjcyj",
       },
       {
-        name: "大气管理风险识别",
-        url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/大气管理风险识别.png",
-        event: "outLinkTo",
-        data: "dqfxgl",
-      },
-      {
         name: "大气热点网格筛查",
         url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/大气热点网格筛查.png",
         event: "outLinkTo",
         data: "dqrdwgsb",
+      },
+      {
+        name: "大气管理风险识别",
+        url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/大气管理风险识别.png",
+        event: "outLinkTo",
+        data: "dqfxgl",
       },
     ],
   },
@@ -94,6 +98,7 @@ const btnlist = [
         name: "精准治水主页",
         url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/精准治水.png",
         event: "goToPreciseWater",
+        data: { target: "_blank" },
       },
       {
         name: "污染溯源",
@@ -131,22 +136,22 @@ const btnlist = [
         data: "wfjzzf",
       },
       {
-        name: "画像分析(无废指数)",
+        name: "建设监测",
         url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/画像分析(无废指数).png",
         event: "outLinkTo",
-        data: "",
+        data: "zshxfx",
       },
       {
-        name: "监测预警(闭环跟踪)",
+        name: "监测预警",
         url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/监测预警(闭环跟踪).png",
         event: "outLinkTo",
-        data: "",
+        data: "zsjcyj",
       },
       {
-        name: "风险识别(涉疫废物监管指数)",
-        url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/风险识别(涉疫废物监管指数).png",
+        name: "风险识别",
+        url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/风险识别.png",
         event: "outLinkTo",
-        data: "",
+        data: "zsfxsb",
       },
     ],
   },
@@ -174,7 +179,7 @@ const btnlist = [
     imgs: [
       {
         name: "环评准入智能研判",
-        url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/环评准入智能研判.png",
+        url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/环境准入智能研判.png",
         event: "outLinkTo",
         data: "hjzr_znyp",
       },
