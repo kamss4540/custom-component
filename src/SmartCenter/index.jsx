@@ -37,6 +37,7 @@ const SmartCenter = (props) => {
 	};
 
 	const onClick = (btn) => {
+		if (btn.label === active.label) return;
 		// 动画开始前如果已经有两个图片则组删除第一个
 		if (contentRef.current.children.length > 1) {
 			contentRef.current.removeChild(contentRef.current.children[0]);
@@ -140,28 +141,28 @@ const btnlist = [
 				data: { target: "_blank" },
 			},
 			{
-				name: "污染溯源",
-				url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/污染溯源.png",
-				event: "outLinkTo",
-				data: "szwrsy",
-			},
-			{
 				name: "水质风险预警",
 				url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/水质风险预警.png",
 				event: "outLinkTo",
 				data: "szfxyj",
 			},
 			{
-				name: "水生态健康评价",
-				url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/水生态健康评价.png",
-				event: "outLinkTo",
-				data: "sstjkpj",
-			},
-			{
 				name: "水质预测分析",
 				url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/水质预测分析.png",
 				event: "outLinkTo",
 				data: "szycfx",
+			},
+			{
+				name: "污染溯源",
+				url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/污染溯源2.png",
+				event: "outLinkTo",
+				data: "szwrsy",
+			},
+			{
+				name: "水生态健康评价",
+				url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/水生态健康评价.png",
+				event: "outLinkTo",
+				data: "sstjkpj",
 			},
 		],
 	},
@@ -196,7 +197,26 @@ const btnlist = [
 	},
 	{
 		label: "精准治土",
-		imgs: [],
+		imgs: [
+			{
+				name: "精准治土主页",
+				url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/精准治土主页.png",
+				event: "outLinkTo",
+				data: "jzzt",
+			},
+			{
+				name: "风险识别",
+				url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/精准治土-风险识别.png",
+				event: "outLinkTo",
+				data: "kflyjg",
+			},
+			{
+				name: "目标管理",
+				url: "/iocoss/$[bucketName]/custom/1588449679633207296/images/目标管理.png",
+				event: "outLinkTo",
+				data: "zdjsyd",
+			},
+		],
 	},
 	{
 		label: "陆海协同",
