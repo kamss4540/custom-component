@@ -1,0 +1,64 @@
+.chartTitle {
+	height: 20px;
+	font-size: 20px;
+	font-family: pingfang;
+	font-weight: 500;
+	color: #ffffff;
+	line-height: 20px;
+}
+
+.line {
+	background-image: url("../image/splitline.png");
+	width: 1px;
+	height: 522px;
+	display: inline-block;
+}
+
+.group {
+	height: 554px;
+}
+
+.t_box {
+	:global {
+		.ant-table {
+			background-color: rgba(70, 137, 179, 0.24);
+
+			tr.ant-table-row:hover > td {
+				background-color: rgba(0, 0, 0, 0);
+			}
+		}
+
+		.ant-table-thead {
+			.ant-table-cell {
+				background-color: rgba(70, 137, 179, 0.24) !important;
+			}
+
+			th {
+				color: rgba(58, 236, 238, 1) !important;
+				font-family: pingfang !important;
+			}
+		}
+
+		.ant-table-cell {
+			border-bottom: none !important;
+			color: #ffffff;
+			height: 42px;
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 42px;
+			padding: 0 !important;
+
+			&::before {
+				background: none !important;
+			}
+		}
+
+		td {
+			border-bottom: none !important;
+		}
+
+		tbody > tr:nth-child(odd) {
+			background-color: rgba(8, 45, 63, 0.24);
+		}
+	}
+}

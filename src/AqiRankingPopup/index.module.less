@@ -1,0 +1,68 @@
+.aqiRankingPopup_Layout {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.5);
+
+	.vessel {
+		background-image: url("./image/bg.png");
+		width: 1476px;
+		height: 669px;
+		display: inline-block;
+		transform-origin: 0 0;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+
+		.header {
+			background-image: url("./image/tbg.png");
+			width: 640px;
+			height: 41px;
+			position: absolute;
+			top: 13px;
+
+			.decorate {
+				background-image: url("./image/ticon.png");
+				width: 28px;
+				height: 31px;
+				display: inline-block;
+				position: absolute;
+				left: 12px;
+				top: 5px;
+			}
+
+			span {
+				width: 192px;
+				height: 33px;
+				font-size: 24px;
+				font-family: pingfang;
+				font-weight: 600;
+				color: #ffffff;
+				line-height: 33px;
+				text-shadow: 0px 2px 4px rgba(3, 57, 81, 0.5);
+				position: absolute;
+				left: 41px;
+				top: 4px;
+			}
+		}
+
+		.close {
+			background-image: url("./image/close.png");
+			width: 28px;
+			height: 28px;
+			display: inline-block;
+			position: absolute;
+			right: 10px;
+			top: 10px;
+		}
+
+		.content {
+			position: absolute;
+			top: 60px;
+			left: 0;
+			right: 0.7%;
+		}
+	}
+}

@@ -38,6 +38,7 @@ const SmartCenter = (props) => {
 
 	const onClick = (btn) => {
 		if (btn.label === active.label) return;
+
 		// 动画开始前如果已经有两个图片则组删除第一个
 		if (contentRef.current.children.length > 1) {
 			contentRef.current.removeChild(contentRef.current.children[0]);
