@@ -1,0 +1,45 @@
+.layout {
+	width: 288px;
+	height: 44px;
+	background: rgba(22, 36, 97, 1);
+	border-radius: 4px;
+	display: flex;
+	border: 1px solid rgba(54, 106, 201, 1);
+	padding: 0 13px;
+	justify-content: space-between;
+	box-sizing: border-box;
+
+	.item {
+		width: 49px;
+		position: relative;
+
+		.icon {
+			width: 49px;
+			height: 4px;
+			border-radius: 1px;
+			display: block;
+			border: 1px solid rgba(54, 106, 201, 1);
+			position: absolute;
+			bottom: 26px;
+		}
+
+		span {
+			position: absolute;
+			bottom: 5px;
+			width: 48px;
+			height: 17px;
+			font-size: 12px;
+			font-family: PingFangSC-Regular, PingFang SC;
+			font-weight: 400;
+			color: #ffffff;
+			line-height: 17px;
+			text-align: center;
+		}
+	}
+
+	.active {
+		.icon {
+			height: 8px;
+		}
+	}
+}

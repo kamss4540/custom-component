@@ -1,4 +1,4 @@
-import Com from "./AqiRankingPopup";
+import Com from "./FireDangerClass";
 
 const data = [
 	{ name: "杭州市", value: 50, level: "优" },
