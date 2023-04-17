@@ -1,17 +1,11 @@
-import Com from "./FireDangerClass";
+import Com from "./AlertTracking";
 
 const data = [
-	{ name: "杭州市", value: 50, level: "优" },
-	{ name: "宁波市", value: 38, level: "优" },
-	{ name: "温州市", value: 40, level: "优" },
-	{ name: "嘉兴市", value: 46, level: "优" },
-	{ name: "湖州市", value: 51, level: "良" },
-	{ name: "绍兴市", value: 47, level: "优" },
-	{ name: "金华市", value: 48, level: "优" },
-	{ name: "衢州市", value: 49, level: "优" },
-	{ name: "舟山市", value: 36, level: "优" },
-	{ name: "台州市", value: 41, level: "优" },
-	{ name: "丽水市", value: 42, level: "优" },
+	{ num: 1025, statusName: "待处置", statusCode: "1" },
+	{ num: 2224, statusName: "已响应", statusCode: "4" },
+	{ num: 5000, statusName: "处置中", statusCode: "2" },
+	{ num: 109955, statusName: "处置完成", statusCode: "3" },
+	{ num: 100, statusName: "无需处置", statusCode: "5" },
 ];
 
 function App() {
