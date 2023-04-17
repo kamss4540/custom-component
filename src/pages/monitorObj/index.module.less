@@ -1,0 +1,33 @@
+.layout {
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		width: 0;
+	}
+
+	.collapse {
+		background: #1890ff;
+
+		:global {
+			.ant-collapse-header-text {
+				color: #fff;
+			}
+			.ant-collapse-content-box {
+				color: #fff;
+				background: #001529;
+			}
+			.ant-descriptions-title {
+				color: #fff;
+			}
+			.ant-descriptions-item-label {
+				color: #fff;
+				white-space: nowrap;
+			}
+			.ant-descriptions-item-content {
+				color: #fff;
+			}
+		}
+	}
+}
