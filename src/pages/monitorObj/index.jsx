@@ -1,14 +1,36 @@
 // 沈阳-预警详情-监测对象
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Collapse, Descriptions } from "antd";
 import styles from "./index.module.less";
+import mockData from "./mockData";
 
 const { Panel } = Collapse;
 
 export default (props) => {
-	const { data: {data, fields} } = props;
+	const {
+		data: { dataKey, fieldsKey },
+	} = props;
 
+	const [data, setData] = useState({});
+	const [fields, setFields] = useState([]);
 
+	useEffect(() => {
+		getData();
+	}, []);
+
+	const getData = () => {
+		if (window.globalEventEmitter) {
+			window.globalEventEmitter.on(dataKey, (e) => {
+				setData(e);
+			});
+			window.globalEventEmitter.on(fieldsKey, (e) => {
+				setFields(e);
+			});
+		} else {
+			setData(mockData.data);
+			setFields(mockData.fields);
+		}
+	};
 
 	return (
 		<div className={styles.layout}>
@@ -27,7 +49,7 @@ export default (props) => {
 							{items.map((item, index) => (
 								<Descriptions
 									key={index}
-									title="3级对象名称"
+									title={`${items.length - index}级对象名称`}
 									bordered
 									column={2}
 									size="small"

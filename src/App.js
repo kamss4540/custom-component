@@ -1,7 +1,7 @@
-import Com from "./pages/monitorObj";
-import data from "./pages/monitorObj/mockData.js";
+import Com from "./pages/MonitorObj";
 
 function App() {
+	const data = {};
 	return (
 		<div style={{ width: 600, height: 500 }}>
 			<Com data={data} />
