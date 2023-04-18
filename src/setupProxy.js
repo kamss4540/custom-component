@@ -8,4 +8,19 @@ module.exports = function (app) {
 			changeOrigin: true,
 		})
 	);
+
+	app.use(
+		"/api",
+		createProxyMiddleware({
+			target: "http://10.35.60.136:32119",
+			changeOrigin: true,
+		})
+	);
+	app.use(
+		"/gw",
+		createProxyMiddleware({
+			target: "http://10.35.60.136:32119",
+			changeOrigin: true,
+		})
+	);
 };

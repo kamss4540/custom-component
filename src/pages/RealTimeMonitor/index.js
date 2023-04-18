@@ -1,8 +1,9 @@
-// 沈阳-预警详情-监测对象
+// 沈阳-预警详情-实时监测
 import React, { useEffect, useState } from "react";
-import { Collapse, Descriptions } from "antd";
+import { Collapse, Tabs } from "antd";
 import styles from "./index.module.less";
 import mockData from "./mockData";
+import MyChart from "./MyChart";
 
 const { Panel } = Collapse;
 
@@ -11,7 +12,7 @@ export default (props) => {
 		data: { dataKey, fieldsKey },
 	} = props;
 
-	const [data, setData] = useState([]);
+	const [data, setData] = useState({});
 	const [fields, setFields] = useState([]);
 
 	useEffect(() => {
@@ -30,6 +31,10 @@ export default (props) => {
 		}
 	};
 
+	const onChange = (key) => {
+		console.log(key);
+	};
+
 	return (
 		<div className={styles.layout}>
 			<Collapse
@@ -44,25 +49,16 @@ export default (props) => {
 							header={`相关报警：${element[0]} 监测对象：${element[1]}}`}
 							key={key}
 						>
-							{items.map((item, index) => (
-								<Descriptions
-									key={index}
-									title={`${items.length - index}级对象名称`}
-									bordered
-									column={2}
-									size="small"
-									className={styles.descriptions}
-								>
-									{fields.map((field) => (
-										<Descriptions.Item
-											key={field.name}
-											label={field.label + ":"}
-										>
-											{item[field.name]}
-										</Descriptions.Item>
-									))}
-								</Descriptions>
-							))}
+							<Tabs
+								onChange={onChange}
+								type="card"
+								size="small"
+								items={items.map((_, i) => ({
+									label: _.kpi,
+									key: _.equipmentId,
+									children: <MyChart />,
+								}))}
+							/>
 						</Panel>
 					);
 				})}
