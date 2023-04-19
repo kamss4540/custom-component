@@ -3,38 +3,86 @@ import * as echarts from "echarts";
 import styles from "./index.module.less";
 import $ from "jquery";
 import mockData from "./mockData";
-import { Radio, DatePicker, Row, Col } from "antd";
+import { Radio, DatePicker, Row, Col, Button } from "antd";
 import moment from "moment";
 
 const { RangePicker } = DatePicker;
 
 export default (props) => {
+	// 图表容器
 	const myRef = useRef(null);
+	// 图表实例
 	const myChart = useRef(null);
-	const [data, setData] = useState({});
+
 	// 日期选择器
 	const [date, setDate] = useState([
 		moment().subtract(1, "days"),
 		moment().subtract(0, "days"),
 	]);
+	// Radio选中值
+	const [radioValue, setRadioValue] = useState("1");
 
 	useEffect(() => {
+		// 初始化图表
 		myChart.current = echarts.init(myRef.current);
+		getData();
 	}, []);
 
-	useEffect(() => {
-		console.log("mockData=>", mockData);
-		getData();
-	}, [date]);
-
+	// 获取数据
 	const getData = () => {
-		setData(mockData);
+		const { itemType, equipmentId, kpi } = props.data;
+		const params = {
+			itemType,
+			equipmentId,
+			startTime: date[0].format("YYYY-MM-DD HH:mm:ss"),
+			endTime: date[1].format("YYYY-MM-DD HH:mm:ss"),
+			typeName: kpi,
+		};
+		$.ajax({
+			url: "http://10.35.60.136:32119/easydata/api/center/JK1642694429480001536",
+			type: "GET",
+			data: params,
+			dataType: "json",
+			success: (res) => {
+				console.log("success", res);
+				if (res.code == "200") {
+					const _data = res.data[0];
+					_data && renderChart(_data);
+				}
+			},
+		});
+	};
+
+	// 渲染图表
+	const renderChart = (val) => {
 		const xAxisData = [];
 		const seriesData = [];
-		mockData.dataList.forEach((item) => {
+		// 获取最大值
+		let markLineMax = null;
+		val.dataList.forEach((item) => {
 			xAxisData.push(item.btime);
 			seriesData.push(item.numdata);
+			if (val.thresholdList && item.numdata > markLineMax) {
+				markLineMax = item.numdata;
+			}
 		});
+
+		// 获取阈值
+		let markLine = val.thresholdList
+			? val.thresholdList.map((item) => {
+					if (item.value > markLineMax) {
+						markLineMax = item.value;
+					}
+					return {
+						name: item.name || "",
+						label: {
+							formatter: "{b}\n{c}",
+						},
+						yAxis: item.value,
+					};
+			  })
+			: [];
+
 		myChart.current.setOption({
 			xAxis: {
 				type: "category",
@@ -45,7 +93,8 @@ export default (props) => {
 			},
 			yAxis: {
 				type: "value",
-				name: mockData.name + ":" + mockData.unit,
+				name: val.name + ":" + val.unit,
+				max: markLineMax,
 				nameTextStyle: {
 					color: "#fff",
 				},
@@ -57,35 +106,25 @@ export default (props) => {
 				{
 					data: seriesData,
 					type: "line",
+					markLine: {
+						silent: true,
+						lineStyle: {
+							color: "#f00",
+						},
+						data: markLine,
+					},
 				},
 			],
 			dataZoom: [
 				{
-					type: "inside",
 					start: 0,
-					end: 20,
+					height: 15,
+					bottom: 10,
 				},
 				{
-					start: 0,
-					end: 20,
+					type: "inside",
 				},
 			],
-		});
-
-		$.ajax({
-			url: "http://10.35.60.136:32119/easydata/api/center/JK1642694429480001536",
-			type: "GET",
-			data: {
-				itemType: "EQUIPMENT_HAZARDOUS_CHEMICALS_RADAR_LEVEL",
-				equipmentId: "20bedfc4bc9976a35276a476a9326873",
-				startTime: "2023-01-01 00:00:00",
-				endTime: "2023-04-01 00:00:00",
-				typeName: "液位",
-			},
-			dataType: "json",
-			success: (e) => {
-				console.log("success", e);
-			},
 		});
 	};
 
@@ -96,7 +135,7 @@ export default (props) => {
 	];
 
 	const onRadioChange = ({ target: { value } }) => {
-		console.log("radio4 checked", value);
+		setRadioValue(value);
 		let temp = [];
 		switch (value) {
 			case "1":
@@ -115,25 +154,31 @@ export default (props) => {
 	};
 
 	const onRangePickerChange = (dates, dateStrings) => {
-		console.log("From: ", dates[0], ", to: ", dates[1]);
-		console.log("From: ", dateStrings[0], ", to: ", dateStrings[1]);
 		setDate(dates);
+		setRadioValue(0);
+	};
+
+	const onClick = () => {
+		getData();
 	};
 
 	return (
 		<div>
-			<Row>
-				<Col span={12}>
+			<Row gutter={16}>
+				<Col span={10}>
 					<Radio.Group
-						defaultValue={"1"}
+						value={radioValue}
 						options={optionsWithDisabled}
 						onChange={onRadioChange}
 						optionType="button"
 						buttonStyle="solid"
 					/>
 				</Col>
-				<Col span={12}>
+				<Col span={10}>
 					<RangePicker showTime value={date} onChange={onRangePickerChange} />
+				</Col>
+				<Col span={4}>
+					<Button onClick={onClick}>查询</Button>
 				</Col>
 			</Row>
 

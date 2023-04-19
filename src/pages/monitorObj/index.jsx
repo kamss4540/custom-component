@@ -20,6 +20,7 @@ export default (props) => {
 
 	const getData = () => {
 		if (window.globalEventEmitter) {
+			setFields(window.getDataByKey(dataKey));
 			window.globalEventEmitter.on(dataKey, (e) => {
 				setData(e);
 			});

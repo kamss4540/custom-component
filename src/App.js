@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import Com from "./pages/DisposalProgress";
+import Com from "./pages/RealTimeMonitor";
 import { fetchCIMToken } from "./service/fetchToken";
-import mockData from "./pages/DisposalProgress/mockData";
+import mockData from "./pages/RealTimeMonitor/mockData";
 
 function App() {
 	const data = {};

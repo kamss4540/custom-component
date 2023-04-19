@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Table } from "antd";
 
 export default (props) => {
-	const { type, data } = props;
+	const { type, data, fields } = props;
 
 	// 预警生成
 	const columns1 = [
@@ -126,20 +126,140 @@ export default (props) => {
 		},
 	];
 
-	const columns = useMemo(() => {
-		switch (type) {
-			case "预警生成":
-				return columns1;
-			case "预警审核发布":
-			case "预警响应":
-			case "预警处置":
-			case "预警解除":
-				return columns2;
-			case "预警督办":
-				return columns3;
-			default:
-				return [];
+	// 报警生成
+	const columns4 = [
+		{
+			title: "区域",
+			dataIndex: "region",
+			key: "region",
+		},
+		{
+			title: "报警类型",
+			dataIndex: "alarmType",
+			key: "alarmType",
+		},
+		{
+			title: "报警时间",
+			dataIndex: "alarmTime",
+			key: "alarmTime",
+		},
+		{
+			title: "报警指标",
+			dataIndex: "alarmKpi",
+			key: "alarmKpi",
+		},
+		{
+			title: "实时值",
+			dataIndex: "realValue",
+			key: "realValue",
+		},
+		{
+			title: "报警位置",
+			dataIndex: "alarmAddress",
+			key: "alarmAddress",
+		},
+		{
+			title: "报警内容",
+			dataIndex: "alarmContent",
+			key: "alarmContent",
+		},
+	];
+
+	// 报警响应
+	const columns5 = [
+		{
+			title: "响应人",
+			dataIndex: "uerName",
+			key: "uerName",
+		},
+		{
+			title: "响应时间",
+			dataIndex: "updateTime",
+			key: "updateTime",
+		},
+	];
+
+	// 报警督办
+	const columns6 = [
+		{
+			title: "督办人",
+			dataIndex: "uerName",
+			key: "uerName",
+		},
+		{
+			title: "督办时间",
+			dataIndex: "updateTime",
+			key: "updateTime",
+		},
+		{
+			title: "督办内容",
+			dataIndex: "description",
+			key: "description",
+		},
+		{
+			title: "附件",
+			dataIndex: "fileUrl",
+			key: "fileUrl",
+		},
+	];
+
+	// 报警处置
+	const columns7 = [
+		{
+			title: "处置人",
+			dataIndex: "uerName",
+			key: "uerName",
+		},
+		{
+			title: "处置时间",
+			dataIndex: "updateTime",
+			key: "updateTime",
+		},
+		{
+			title: "处置结果",
+			dataIndex: "disposaResult",
+			key: "disposaResult",
+		},
+		{
+			title: "处置类型",
+			dataIndex: "disposaType",
+			key: "disposaType",
+		},
+		{
+			title: "处置说明",
+			dataIndex: "description",
+			key: "description",
+		},
+		{
+			title: "附件",
+			dataIndex: "fileUrl",
+			key: "fileUrl",
+		},
+	];
+
+	const [columnsMapping, setColumnsMapping] = useState({
+		预警生成: columns1,
+		预警审核发布: columns2,
+		预警响应: columns2,
+		预警处置: columns2,
+		预警解除: columns2,
+		预警督办: columns3,
+		报警生成: columns4,
+		报警响应: columns5,
+		报警督办: columns6,
+		报警处置: columns7,
+	});
+
+	useEffect(() => {
+		if (fields) {
+			let _columnsMapping = { ...columnsMapping, ...fields };
+			setColumnsMapping(_columnsMapping);
 		}
+	}, []);
+
+	const columns = useMemo(() => {
+		let _columns = columnsMapping[type];
+		return _columns || columns1;
 	}, [type]);
 
 	return (
@@ -148,6 +268,7 @@ export default (props) => {
 			dataSource={data}
 			size="small"
 			pagination={false}
+			bordered
 		/>
 	);
 };
