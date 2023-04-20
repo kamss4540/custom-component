@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import Com from "./pages/Correlation";
+import Com from "./pages/RealTimeMonitor";
 import { fetchCIMToken } from "./service/fetchToken";
-import mockData from "./pages/Correlation/mockData";
+import mockData from "./pages/RealTimeMonitor/mockData";
 
 function App() {
 	const data = {};
 
 	return (
-		<div style={{ width: 600, height: 300 }}>
+		<div style={{ width: 779, height: 300, border: "1px solid red" }}>
 			<Com
 				data={mockData}
 				config={{

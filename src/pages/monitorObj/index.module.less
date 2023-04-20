@@ -7,28 +7,100 @@
 		width: 0;
 	}
 
-    :global {
-        .ant-collapse {
-	        background: #d7d7d7;
-            border: none;
-        }
+	.collapse {
+		.card {
+			margin-bottom: 16px;
+			position: relative;
+			padding-top: 26px;
+
+			i {
+				position: absolute;
+				background-image: url("./images/numbg.png");
+				width: 54px;
+				height: 56px;
+				display: block;
+				top: 0;
+				left: -2px;
+				z-index: 1;
+
+				span {
+					font-size: 24px;
+					font-family: PingFangSC-Semibold, PingFang SC;
+					font-weight: 600;
+					color: #ffffff;
+					line-height: 38px;
+					font-style: normal;
+					text-align: center;
+					display: block;
+				}
+			}
+
+			.subTitle {
+				background-image: url("./images/subg.png");
+				width: 211px;
+				height: 37px;
+				font-size: 18px;
+				font-family: PingFangSC-Semibold, PingFang SC;
+				font-weight: 600;
+				color: #40b3ff;
+				line-height: 37px;
+				text-indent: 38px;
+				position: absolute;
+				left: 19px;
+				top: 6px;
+			}
+
+			.content {
+				background: rgba(24, 76, 167, 0.34);
+				border-radius: 8px;
+				border: 1px solid rgba(44, 133, 255, 0.51);
+				padding-top: 24px;
+				padding-bottom: 8px;
+			}
+		}
+	}
+
+	:global {
+		.ant-collapse {
+			border: none;
+
+			svg {
+				color: #fff;
+			}
+
+			.ant-collapse-header {
+				background-image: url("./images/panelHeader.png");
+			}
+
+			.ant-collapse-content {
+				background-color: rgba(0, 0, 0, 0);
+			}
+		}
 		.ant-collapse-header-text {
 			color: #fff;
 		}
 		.ant-collapse-content-box {
 			color: #fff;
-			background: #103172;
+			// background-color: rgba(0, 0, 0, 0);
 		}
 		.ant-descriptions-title {
 			color: #fff;
 		}
 		.ant-descriptions-item-label {
-			color: #fff;
 			white-space: nowrap;
-            background-color: rgba(0, 0, 0, 0);
+			background-color: rgba(0, 0, 0, 0);
+			font-size: 16px;
+			font-family: PingFangSC-Semibold, PingFang SC;
+			font-weight: 600;
+			color: #40b3ff !important;
+			line-height: 16px;
 		}
 		.ant-descriptions-item-content {
-			color: #fff;
+			font-size: 16px;
+			font-family: PingFangSC-Medium, PingFang SC;
+			font-weight: 500;
+			color: #ffffff;
+			line-height: 16px;
 		}
 	}
 }

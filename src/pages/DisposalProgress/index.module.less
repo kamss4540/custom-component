@@ -3,7 +3,7 @@
 	height: 100%;
 	overflow-y: auto;
 	padding-left: 3px;
-	
+
 	&::-webkit-scrollbar {
 		width: 0;
 	}
@@ -13,17 +13,73 @@
 			color: #fff !important;
 		}
 
-		.ant-table-content {
-			color: #fff;
-		}
-
 		.ant-table {
-			background: none;
-		}
+			color: #fff;
+			background-color: transparent;
+			.ant-table-thead > tr > th,
+			.ant-table-tbody > tr > td {
+				color: #fff;
+				border-bottom: 1px solid #39609d;
+			}
 
-		.ant-table-cell {
-			background: none !important;
-			color: #fff !important;
+			.ant-table-row {
+				// background-color: rgba(0, 8, 59, 0.68);
+				// color: #fff;
+
+				&:hover {
+					td {
+						background-color: rgba(20, 153, 253, 0.6) !important;
+					}
+				}
+			}
+			// 偶数行背景色为rgba(24, 66, 142, 0.4)
+			.ant-table-row:nth-child(2n) {
+				background-color: rgba(24, 66, 142, 0.4);
+			}
+
+			.ant-table-tbody > .ant-table-placeholder > td {
+				border-bottom: none;
+			}
+
+			.ant-table-thead > tr > th {
+				background: rgba(24, 66, 142, 0.4);
+				padding: 11px 10px;
+				text-align: center;
+			}
+			.ant-table-tbody > tr > td {
+				font-size: 14px;
+				padding: 7px 10px;
+			}
+
+			.ant-table-tbody > tr.ant-table-row:hover {
+				background: transparent;
+				cursor: pointer;
+				> td {
+					background: transparent;
+				}
+			}
+			.ant-table-tbody > tr.ant-table-placeholder:hover > td {
+				background-color: transparent;
+			}
+			.ant-empty-normal {
+				color: #fff;
+				.ant-empty-image {
+					height: 100%;
+					svg {
+						height: 100px;
+						width: 100px;
+					}
+				}
+			}
+		}
+		.ant-table.ant-table-bordered {
+			.ant-table-thead > tr > th,
+			.ant-table-tbody > tr > td {
+				border-right: 1px solid #39609d !important;
+			}
+		}
+		.ant-table.ant-table-bordered > .ant-table-container {
+			border: none;
 		}
 	}
 }

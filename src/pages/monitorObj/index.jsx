@@ -20,11 +20,11 @@ export default (props) => {
 
 	const getData = () => {
 		if (window.globalEventEmitter) {
-			setFields(window.getDataByKey(dataKey));
 			window.globalEventEmitter.on(dataKey, (e) => {
-				setData(e);
+				e && setData(e);
 			});
-			setFields(window.getDataByKey(fieldsKey));
+			let _fields = window.getDataByKey(fieldsKey);
+			_fields && setFields(_fields);
 		} else {
 			setData(mockData.data);
 			setFields(mockData.fields);
@@ -36,6 +36,7 @@ export default (props) => {
 			<Collapse
 				defaultActiveKey={[Object.keys(data)[0]]}
 				className={styles.collapse}
+				expandIconPosition="right"
 			>
 				{Object.keys(data).map((key) => {
 					const items = data[key];
@@ -46,23 +47,34 @@ export default (props) => {
 							key={key}
 						>
 							{items.map((item, index) => (
-								<Descriptions
-									key={index}
-									title={`${items.length - index}级对象名称`}
-									bordered
-									column={2}
-									size="small"
-									className={styles.descriptions}
-								>
-									{fields.map((field) => (
-										<Descriptions.Item
-											key={field.name}
-											label={field.label + ":"}
+								<div className={styles.card}>
+									<>
+										<i>
+											<span>{items.length - index}</span>
+										</i>
+										<div className={styles.subTitle}>{`${
+											items.length - index
+										}级对象名称`}</div>
+									</>
+									<div className={styles.content}>
+										<Descriptions
+											key={index}
+											bordered
+											column={2}
+											size="small"
+											className={styles.descriptions}
 										>
-											{item[field.name]}
-										</Descriptions.Item>
-									))}
-								</Descriptions>
+											{fields.map((field) => (
+												<Descriptions.Item
+													key={field.name}
+													label={field.label + ":"}
+												>
+													{item[field.name]}
+												</Descriptions.Item>
+											))}
+										</Descriptions>
+									</div>
+								</div>
 							))}
 						</Panel>
 					);

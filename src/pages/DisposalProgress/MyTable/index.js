@@ -260,7 +260,7 @@ export default (props) => {
 	const columns = useMemo(() => {
 		let _columns = columnsMapping[type];
 		return _columns || columns1;
-	}, [type]);
+	}, [columnsMapping, type]);
 
 	return (
 		<Table
