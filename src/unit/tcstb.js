@@ -1382,24 +1382,6 @@ let list = [
 		columnTitle: "状态77",
 	},
 	{
-		id: "79",
-		key: 1672309628876,
-		name: "状态79",
-		ruleSymbol: "equal",
-		ruleVal: "监测对象",
-		text: {
-			fontSize: "14px",
-			fontFamily: "Microsoft Yahei",
-			fontWeight: "normal",
-			color: "#ffffff",
-		},
-		defaultIcon:
-			"/iocoss/datai/screen/1598510631806693376/images/icon／监测对象 copy@2x.png",
-		highIcon:
-			"/iocoss/datai/screen/1598510631806693376/images/icon／监测对象 copy@2x.png",
-		columnTitle: "状态78",
-	},
-	{
 		id: "80",
 		key: 1672309653906,
 		name: "状态80",
@@ -1598,18 +1580,65 @@ let list = [
 		columnTitle: "状态89",
 	},
 ];
-let treeKey = "daa24582f95c4128a7eec648ab28c767";
+// 图层树的key
+let treeKey = "n81yPBFjChVHdzEeR1YzFU";
+// 二维地图的key
+let mapKey = "@com_1d95771e8b584d7d92ee2898acbc1e84";
+// 图层图例的key
+let legendKey = "8vSNVCCPGXsYEnS2mJkcf9";
+// 图层树图标
 let tarArr = DataI.getComList(treeKey)[0].customStyles.iconTab.status;
+// 图层图例图标
+let tarArr2 =
+	DataI.getComList(legendKey)[0].customStyles.layerStyle.layerStatus;
 list.forEach((item) => {
-	let flag = true;
+	let flag1 = true;
+	// 替换图层树图标
 	tarArr.forEach((item2) => {
 		if (item.ruleVal === item2.ruleVal) {
 			item2.defaultIcon = item.defaultIcon;
 			item2.highIcon = item.highIcon;
-			flag = false;
+			flag1 = false;
 		}
 	});
-	if (flag) {
+	if (flag1) {
 		tarArr.push(item);
 	}
+	console.log("替换图层树图标执行完毕");
+
+	let flag2 = true;
+	// 替换图层图例图标
+	tarArr2.forEach((item2) => {
+		if (item.ruleVal === item2.ruleVal) {
+			item2.defaultIcon = item.defaultIcon;
+			item2.highIcon = item.highIcon;
+			flag2 = false;
+		}
+	});
+	if (flag2) {
+		tarArr2.push(item);
+	}
+	console.log("替换图层图例图标执行完毕");
 });
+// 图层映射
+const { mapLayers } = DataI.getComList(treeKey)[0].props;
+// 替换二维地图点图层图标
+DataI.getComList(mapKey)[0].layers.forEach((item) => {
+	if (item.compName === "基础点图层") {
+		list.forEach((item2) => {
+			if (item2.ruleVal === item.name) {
+				let arr = item.instance.compAttr.legend;
+				arr[0].icon = item2.defaultIcon;
+				arr[0].size = 0.5;
+				arr[0].clickStyle.icon = item2.defaultIcon;
+				arr[0].clickStyle.size = 1;
+				arr[0].hoverStyle.icon = item2.defaultIcon;
+				arr[0].hoverStyle.size = 0.5;
+				arr[0].selectedStyle.icon = item2.defaultIcon;
+				arr[0].selectedStyle.size = 0.5;
+				console.log(item.name, "执行成功", arr[0]);
+			}
+		});
+	}
+});
+console.log("替换图层图例执行完毕");
