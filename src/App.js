@@ -1,13 +1,20 @@
 import { useEffect } from "react";
-import Com from "./pages/CustomList";
+import Com from "./pages/VideoSurveillance";
 import { fetchCIMToken } from "./service/fetchToken";
-import mockData from "./pages/CustomList/mockData";
+import mockData from "./pages/VideoSurveillance/mockData";
+import $ from "jquery";
+
+window.$ = $;
 
 function App() {
 	const data = {};
 
+	useEffect(() => {
+		// fetchCIMToken()
+	}, [])
+
 	return (
-		<div style={{ width: 779, height: 300, border: "1px solid red" }}>
+		<div style={{ width: 1180, height: 860, border: "1px solid red" }}>
 			<Com
 				data={mockData}
 				config={{

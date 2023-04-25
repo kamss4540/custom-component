@@ -23,4 +23,11 @@ module.exports = function (app) {
 			changeOrigin: true,
 		})
 	);
+	app.use(
+		"/iocoss",
+		createProxyMiddleware({
+			target: "http://10.35.60.136:32119",
+			changeOrigin: true,
+		})
+	);
 };

@@ -1,0 +1,31 @@
+.video_vessel {
+	display: flex;
+	flex-wrap: wrap;
+	height: 100%;
+	background-color: #262626;
+
+	.item {
+		width: 50%;
+		height: 50%;
+		overflow: hidden;
+		border: 1px solid #000000;
+	}
+
+	.active {
+		border-color: #ffcc00;
+	}
+}
+
+.mode1 {
+	
+	.item {
+		width: 100%;
+		height: 100%;
+		display: none;
+	}
+
+	.active {
+		border-color: #000;
+		display: block;
+	}
+}
