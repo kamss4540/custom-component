@@ -1,13 +1,40 @@
-.video_tree {
-	color: #fff;
-	background-color: rgba(0, 0, 0, 0);
+.v_tree {
+	input {
+		height: 32px;
+		background: rgba(0, 0, 0, 0);
+		color: #fff;
+	}
+
+	button {
+		background: #1677ff;
+		color: #fff !important;
+	}
 
 	:global {
-		.ant-tree-treenode {
-			overflow: hidden;
+		.ant-input-group-wrapper {
+			padding: 8px;
 		}
-		.ant-tree-node-content-wrapper.ant-tree-node-content-wrapper-normal {
-			white-space: nowrap;
+	}
+
+	.video_tree {
+		color: #fff !important;
+		background-color: rgba(0, 0, 0, 0) !important;
+
+		.site_tree_search_value {
+			color: #faad14;
+		}
+
+		:global {
+			.ant-tree-treenode {
+				overflow: hidden;
+
+				&:hover:before {
+					background: rgba(0, 0, 0, 0) !important;
+				}
+			}
+			.ant-tree-node-content-wrapper.ant-tree-node-content-wrapper-normal {
+				white-space: nowrap;
+			}
 		}
 	}
 }

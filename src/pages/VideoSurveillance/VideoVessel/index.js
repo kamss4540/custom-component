@@ -52,6 +52,7 @@ const VideoVessel = (props) => {
 						layout={layout}
 						setLayout={setLayout}
 						playerRefList={playerRefList}
+						playNextVideo={props.playNextVideo}
 					/>
 				</div>
 			))}

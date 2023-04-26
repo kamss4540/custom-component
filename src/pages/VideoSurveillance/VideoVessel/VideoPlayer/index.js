@@ -3,7 +3,8 @@ import styles from "./index.module.less";
 import { FullscreenOutlined, FullscreenExitOutlined } from "@ant-design/icons";
 
 const VideoPlayer = (props) => {
-	const { data, index, layout, setLayout, playerRefList } = props;
+	const { data, index, layout, setLayout, playerRefList, playNextVideo } =
+		props;
 
 	const videoRef = useRef(null);
 	const jessibuca = useRef(null);
@@ -68,14 +69,18 @@ const VideoPlayer = (props) => {
 					play(res.data.flv);
 				} else if (res.code === 100) {
 					// 收流超时 | 点播失败
-					if (count.current > 5) {
-						setConnectStatus(2);
+					if (count.current > 2) {
+						if (data.initiative) {
+							setConnectStatus(2);
+						} else {
+							playNextVideo(index);
+						}
 					} else {
 						count.current += 1;
 						clearTimeout(timer.current);
 						timer.current = setTimeout(() => {
 							requestPlayUrl();
-						}, count.current * 1000);
+						}, 3000);
 					}
 				}
 			});
@@ -107,20 +112,20 @@ const VideoPlayer = (props) => {
 	};
 
 	const onAmplificationClick = (e) => {
-		playerRefList.current.forEach((item, _index) => {
-			if (index !== _index && item.instance) {
-				item.instance.destroy();
-			}
-		});
+		// playerRefList.current.forEach((item, _index) => {
+		// 	if (index !== _index && item.instance) {
+		// 		item.instance.destroy();
+		// 	}
+		// });
 		setLayout(1);
 	};
 
 	const onNarrowClick = (e) => {
-		playerRefList.current.forEach((item, _index) => {
-			if (index !== _index && item.play) {
-				item.play();
-			}
-		});
+		// playerRefList.current.forEach((item, _index) => {
+		// 	if (index !== _index && item.play) {
+		// 		item.play();
+		// 	}
+		// });
 		setLayout(4);
 	};
 

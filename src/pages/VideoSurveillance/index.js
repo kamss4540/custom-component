@@ -17,7 +17,7 @@ const VideoSurveillance = (props) => {
 	const timer = useRef(null);
 
 	// 折叠状态
-	const [collapsed, setCollapsed] = useState(true);
+	const [collapsed, setCollapsed] = useState(false);
 	// 加载状态
 	const [loading, setLoading] = useState(true);
 	// 树形数据
@@ -31,7 +31,7 @@ const VideoSurveillance = (props) => {
 	// 当前布局 1：单屏 4：四屏
 	const [layout, setLayout] = useState(4);
 	// 轮播状态
-	const [isPlay, setIsPlay] = useState(true);
+	const [isAutoPlay, setIsAutoPlay] = useState(true);
 
 	useEffect(() => {
 		importJessibuca();
@@ -39,11 +39,11 @@ const VideoSurveillance = (props) => {
 
 	useEffect(() => {
 		setData(props.data || []);
-		// 初始化视频列表
 	}, [props.data]);
 
 	useEffect(() => {
 		if (data.length && data[0].children?.length) {
+			// 初始化视频列表
 			setVideoList(data[0].children.slice(0, 4));
 		}
 	}, [data]);
@@ -53,14 +53,22 @@ const VideoSurveillance = (props) => {
 		return () => {
 			clearInterval(timer.current);
 		};
-	}, [isPlay, videoList]);
+	}, [isAutoPlay, videoList]);
+
+	// layout 为1时，暂停轮播
+	useEffect(() => {
+		if (layout === 1) {
+			stopCarousel();
+		}
+	}, [layout]);
 
 	// 轮播
 	const carousel = () => {
-		if (isPlay) {
+		if (isAutoPlay) {
 			clearInterval(timer.current);
 			timer.current = setInterval(() => {
 				let _videoList = [];
+				// 获取当前视频的下一个视频
 				data.forEach((item) => {
 					item.children.forEach((child, index) => {
 						videoList.forEach((video) => {
@@ -74,12 +82,38 @@ const VideoSurveillance = (props) => {
 					});
 				});
 				setVideoList(_videoList);
-			}, 60 * 1000);
+			}, 45 * 1000);
 		}
+	};
+
+	// 查询最后一个视频所在的位置
+	const getLastVideo = () => {
+		let arr = [];
+		data.forEach((item, index1) => {
+			item.children.forEach((child, index2) => {
+				videoList.forEach((video) => {
+					if (video?.moid === child.moid) {
+						arr[0] = index1;
+						arr[1] = index2;
+					}
+				});
+			});
+		});
+		return arr;
+	};
+
+	// 在指定索引的播放器播放下一个视频
+	const playNextVideo = (index) => {
+		let arr = getLastVideo();
+		let _videoList = [...videoList];
+		const getIndex = (num) => (num + 1) % data[arr[0]].children.length;
+		_videoList[index] = data[arr[0]].children[getIndex(arr[1] + 1)];
+		setVideoList(_videoList);
 	};
 
 	// 停止轮播
 	const stopCarousel = () => {
+		setIsAutoPlay(false);
 		clearInterval(timer.current);
 	};
 
@@ -132,6 +166,7 @@ const VideoSurveillance = (props) => {
 								setSelected={setSelected}
 								layout={layout}
 								setLayout={setLayout}
+								playNextVideo={playNextVideo}
 							/>
 						)}
 					</Content>
@@ -144,15 +179,14 @@ const VideoSurveillance = (props) => {
 								onClick: () => setCollapsed(!collapsed),
 							}
 						)}
-						{React.createElement(isPlay ? RetweetOutlined : PauseOutlined, {
+						{React.createElement(isAutoPlay ? PauseOutlined : RetweetOutlined, {
 							className: styles.play,
 							onClick: () => {
-								if (isPlay) {
-									setIsPlay(false);
-									carousel();
-								} else {
-									setIsPlay(true);
+								if (isAutoPlay) {
 									stopCarousel();
+								} else {
+									setIsAutoPlay(true);
+									carousel();
 								}
 							},
 						})}
