@@ -1,4 +1,3 @@
-import * as $ from "jquery";
 import Cookies from "js-cookie";
 
 export const fetchCIMToken = () => {
@@ -10,12 +9,11 @@ export const fetchCIMToken = () => {
 			authType: 0,
 			isEncryption: false,
 		};
-		return $.post("/gw/auth/login", param, (res) => {
+		return window.$.post("/gw/auth/login", param, (res) => {
 			const { status, response = {} } = res;
 			if (status === 200) {
-				const { result, code, message: msg } = response;
+				const { result, code } = response;
 				if (code !== 0) {
-					// message.error(msg);
 					return Promise.reject(code);
 				}
 				Cookies.set("token", result.token);

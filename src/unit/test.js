@@ -1,135 +1,340 @@
-import { Input, Tree } from "antd";
-import { useMemo, useState } from "react";
-const { Search } = Input;
-const x = 3;
-const y = 2;
-const z = 1;
-const defaultData = [];
-const generateData = (_level, _preKey, _tns) => {
-	const preKey = _preKey || "0";
-	const tns = _tns || defaultData;
-	const children = [];
-	for (let i = 0; i < x; i++) {
-		const key = `${preKey}-${i}`;
-		tns.push({
-			title: key,
-			key,
-		});
-		if (i < y) {
-			children.push(key);
-		}
-	}
-	if (_level < 0) {
-		return tns;
-	}
-	const level = _level - 1;
-	children.forEach((key, index) => {
-		tns[index].children = [];
-		return generateData(level, key, tns[index].children);
-	});
-};
-generateData(z);
-const dataList = [];
-const generateList = (data) => {
-	for (let i = 0; i < data.length; i++) {
-		const node = data[i];
-		const { key } = node;
-		dataList.push({
-			key,
-			title: key,
-		});
-		if (node.children) {
-			generateList(node.children);
-		}
-	}
-};
-generateList(defaultData);
-const getParentKey = (key, tree) => {
-	let parentKey;
-	for (let i = 0; i < tree.length; i++) {
-		const node = tree[i];
-		if (node.children) {
-			if (node.children.some((item) => item.key === key)) {
-				parentKey = node.key;
-			} else if (getParentKey(key, node.children)) {
-				parentKey = getParentKey(key, node.children);
+export default {
+	"success": true,
+	"code": "200",
+	"message": "处理成功",
+	"data": {
+		"data": [
+			{
+				"attr_DeviceType": "TD",
+				"attr_SupervisorLinkMan": "李新辉",
+				"attr_ProjectTelPhone": "18742019099",
+				"attr_ArchitectureUnit": "",
+				"attr_ItemName": "BHHGHJ-20222-001",
+				"sys_type": "EQUIPMENT_BUILD_TOWER_CRANE",
+				"sys_moid": "5f87186e94b0f688b56f8abe058d9900",
+				"attr_SetupStatus": "安装",
+				"attr_Coordinate": "POINT(123.469464 41.840544)",
+				"attr_ConstructionUnit": "中国建筑第八工程局有限公司",
+				"attr_ArchitectureUnitLinkMan": "孔翔龙",
+				"sys_modifyDate": "2022-12-08 12:12:05.114",
+				"attr_Address": "辽宁省沈阳市皇姑区乌苏里江街",
+				"attr_SupervisorUnit": "辽宁方圆建设项目管理有限公司",
+				"attr_TowerRecordNum": "BHHGHJ-20222-001",
+				"attr_ProjectType": "在建",
+				"sys_createDate": "2022-11-09 14:41:10.817",
+				"attr_ArchitectureUnitTelPhone": "18900915766",
+				"attr_ProjectLinkMan": "王远",
+				"attr_Region": "210104",
+				"attr_SupervisorTelPhone": "13840051322",
+				"attr_ConstructionStage": "在建",
+				"attr_ProjectNum": "e7dbaed4-1f97-4336-8a12-38460b883ba6",
+				"attr_ProjectCreateTime": "2022-10-24 10:13:52",
+				"attr_EquipmentId": "BHHGHJ-20222-001",
+				"regionName": "大东区",
+				"regionOrder": "10",
+				"haveCoordinate": "y",
+				"coordinateId": "POINT12346946441840544",
+				"longitude": "123.469464",
+				"latitude": "41.840544"
+			},
+			{
+				"attr_DeviceType": "TD",
+				"attr_SupervisorLinkMan": "李新辉",
+				"attr_ProjectTelPhone": "18742019099",
+				"attr_ArchitectureUnit": "",
+				"attr_ItemName": "BHHGHJ-20222-002",
+				"sys_type": "EQUIPMENT_BUILD_TOWER_CRANE",
+				"sys_moid": "5229a3d802e56a8735cafdc009718d39",
+				"attr_SetupStatus": "安装",
+				"attr_Coordinate": "POINT(123.469464 41.840544)",
+				"attr_ConstructionUnit": "中国建筑第八工程局有限公司",
+				"attr_ArchitectureUnitLinkMan": "孔翔龙",
+				"sys_modifyDate": "2022-12-08 12:12:04.407",
+				"attr_Address": "辽宁省沈阳市皇姑区乌苏里江街",
+				"attr_SupervisorUnit": "辽宁方圆建设项目管理有限公司",
+				"attr_TowerRecordNum": "BHHGHJ-20222-002",
+				"attr_ProjectType": "在建",
+				"sys_createDate": "2022-11-09 14:41:10.176",
+				"attr_ArchitectureUnitTelPhone": "18900915766",
+				"attr_ProjectLinkMan": "王远",
+				"attr_Region": "210104",
+				"attr_SupervisorTelPhone": "13840051322",
+				"attr_ConstructionStage": "在建",
+				"attr_ProjectNum": "e7dbaed4-1f97-4336-8a12-38460b883ba6",
+				"attr_ProjectCreateTime": "2022-10-24 10:14:12",
+				"attr_EquipmentId": "BHHGHJ-20222-002",
+				"regionName": "大东区",
+				"regionOrder": "10",
+				"haveCoordinate": "y",
+				"coordinateId": "POINT12346946441840544",
+				"longitude": "123.469464",
+				"latitude": "41.840544"
+			},
+			{
+				"attr_DeviceType": "TD",
+				"attr_SupervisorLinkMan": "张晓光",
+				"attr_ProjectTelPhone": "18012224536",
+				"attr_ArchitectureUnit": "沈阳梁铭房地产开发有限公司",
+				"attr_ItemName": "苏备FDT19040010",
+				"sys_type": "EQUIPMENT_BUILD_TOWER_CRANE",
+				"sys_moid": "8c69239b3154707e719ee0f1bbdf7e7e",
+				"attr_SetupStatus": "安装",
+				"attr_Coordinate": "POINT(123.512464 41.869353)",
+				"attr_ConstructionUnit": "江苏省苏中建设集团股份有限公司",
+				"attr_ArchitectureUnitLinkMan": "刘海",
+				"sys_modifyDate": "2022-12-08 12:12:11.939",
+				"attr_Address": "辽宁省沈阳市大东区",
+				"attr_SupervisorUnit": "沈阳市建设工程项目管理中心有限责任公司",
+				"attr_TowerRecordNum": "苏备FDT19040010",
+				"attr_ProjectType": "在建",
+				"sys_createDate": "2022-11-09 14:41:14.140",
+				"attr_ProjectLinkMan": "杨国锋",
+				"attr_Region": "210104",
+				"attr_SupervisorTelPhone": "13478162616",
+				"attr_ConstructionStage": "在建",
+				"attr_ProjectNum": "d755040e-4171-4dac-857d-ac46142ea6e6",
+				"attr_ProjectCreateTime": "2022-07-18 12:14:00",
+				"attr_EquipmentId": "苏备FDT19040010",
+				"regionName": "大东区",
+				"regionOrder": "10",
+				"haveCoordinate": "y",
+				"coordinateId": "POINT12351246441869353",
+				"longitude": "123.512464",
+				"latitude": "41.869353"
+			},
+			{
+				"attr_DeviceType": "TD",
+				"attr_SupervisorLinkMan": "张晓光",
+				"attr_ProjectTelPhone": "18012224536",
+				"attr_ArchitectureUnit": "沈阳梁铭房地产开发有限公司",
+				"attr_ItemName": "苏备FDT20050041",
+				"sys_type": "EQUIPMENT_BUILD_TOWER_CRANE",
+				"sys_moid": "95a2c5a4649bc6e9bf34b496fe7bad5c",
+				"attr_SetupStatus": "安装",
+				"attr_Coordinate": "POINT(123.512464 41.869353)",
+				"attr_ConstructionUnit": "江苏省苏中建设集团股份有限公司",
+				"attr_ArchitectureUnitLinkMan": "刘海",
+				"sys_modifyDate": "2022-12-08 12:12:10.396",
+				"attr_Address": "辽宁省沈阳市大东区",
+				"attr_SupervisorUnit": "沈阳市建设工程项目管理中心有限责任公司",
+				"attr_TowerRecordNum": "苏备FDT20050041",
+				"attr_ProjectType": "在建",
+				"sys_createDate": "2022-11-09 14:41:12.769",
+				"attr_ProjectLinkMan": "杨国锋",
+				"attr_Region": "210104",
+				"attr_SupervisorTelPhone": "13478162616",
+				"attr_ConstructionStage": "在建",
+				"attr_ProjectNum": "d755040e-4171-4dac-857d-ac46142ea6e6",
+				"attr_ProjectCreateTime": "2022-07-18 12:18:10",
+				"attr_EquipmentId": "苏备FDT20050041",
+				"regionName": "大东区",
+				"regionOrder": "10",
+				"haveCoordinate": "y",
+				"coordinateId": "POINT12351246441869353",
+				"longitude": "123.512464",
+				"latitude": "41.869353"
+			},
+			{
+				"attr_DeviceType": "TD",
+				"attr_SupervisorLinkMan": "徐可傲",
+				"attr_ProjectTelPhone": "15174144988",
+				"attr_ArchitectureUnit": "沈阳金胜置业有限公司",
+				"attr_ItemName": "辽AA-T00153",
+				"sys_type": "EQUIPMENT_BUILD_TOWER_CRANE",
+				"sys_moid": "0f4e2453f50913ee1e2bddc604214611",
+				"attr_SetupStatus": "安装",
+				"attr_Coordinate": "POINT(123.531021 41.858526)",
+				"attr_ConstructionUnit": "沈阳建业建筑工程有限公司",
+				"attr_ArchitectureUnitLinkMan": "孟祥久",
+				"sys_modifyDate": "2022-12-08 12:06:48.529",
+				"attr_Address": "辽宁省沈阳市大东区",
+				"attr_SupervisorUnit": "沈阳市投资监理有限公司",
+				"attr_TowerRecordNum": "辽AA-T00153",
+				"attr_ProjectType": "在建",
+				"sys_createDate": "2022-11-09 14:36:28.265",
+				"attr_ArchitectureUnitTelPhone": "18809873785",
+				"attr_ProjectLinkMan": "王冰",
+				"attr_Region": "210104",
+				"attr_SupervisorTelPhone": "",
+				"attr_ConstructionStage": "在建",
+				"attr_ProjectNum": "259889ed-c699-4917-b41c-ecb7c5b77a57",
+				"attr_ProjectCreateTime": "2022-07-18 13:23:09",
+				"attr_EquipmentId": "辽AA-T00153",
+				"regionName": "大东区",
+				"regionOrder": "10",
+				"haveCoordinate": "y",
+				"coordinateId": "POINT12353102141858526",
+				"longitude": "123.531021",
+				"latitude": "41.858526"
+			},
+			{
+				"attr_DeviceType": "TD",
+				"attr_SupervisorLinkMan": "王刚",
+				"attr_ProjectTelPhone": "15840394156",
+				"attr_ArchitectureUnit": "沈阳卓盛置业有限公司",
+				"attr_ItemName": "辽AA-T00169",
+				"sys_type": "EQUIPMENT_BUILD_TOWER_CRANE",
+				"sys_moid": "63fc626b208f50d639f0041ff836a31c",
+				"attr_SetupStatus": "拆除",
+				"attr_Coordinate": "POINT(123.473396 41.877536)",
+				"attr_ConstructionUnit": "沈阳建业建筑工程有限公司",
+				"attr_ArchitectureUnitLinkMan": "韩凯",
+				"sys_modifyDate": "2022-12-08 12:17:37.987",
+				"attr_Address": "辽宁省沈阳市皇姑区",
+				"attr_SupervisorUnit": "沈阳建华建设项目管理有限公司",
+				"attr_TowerRecordNum": "辽AA-T00169",
+				"attr_ProjectType": "在建",
+				"sys_createDate": "2022-11-09 14:46:00.707",
+				"attr_ArchitectureUnitTelPhone": "18202488422",
+				"attr_ProjectLinkMan": "金才",
+				"attr_Region": "210104",
+				"attr_SupervisorTelPhone": "13898818041",
+				"attr_ProjectNum": "61d16369-d7dd-43e5-beaf-9bf074356c83",
+				"attr_ConstructionStage": "在建",
+				"attr_ProjectCreateTime": "2022-07-23 12:51:46",
+				"attr_EquipmentId": "辽AA-T00169",
+				"regionName": "大东区",
+				"regionOrder": "10",
+				"haveCoordinate": "y",
+				"coordinateId": "POINT12347339641877536",
+				"longitude": "123.473396",
+				"latitude": "41.877536"
+			},
+			{
+				"attr_DeviceType": "TD",
+				"attr_SupervisorLinkMan": "阎春菊",
+				"attr_ProjectTelPhone": "13889154418",
+				"attr_ArchitectureUnit": "沈阳润投房地产开发有限公司",
+				"attr_ItemName": "辽AA-T00248",
+				"sys_type": "EQUIPMENT_BUILD_TOWER_CRANE",
+				"sys_moid": "2704018b94aadcfe4a63a4f25733ed81",
+				"attr_SetupStatus": "安装",
+				"attr_Coordinate": "POINT(123.515946 41.827551)",
+				"attr_ConstructionUnit": "沈阳华强建设集团有限公司",
+				"attr_ArchitectureUnitLinkMan": "姚进",
+				"sys_modifyDate": "2022-12-08 12:10:09.780",
+				"attr_Address": "辽宁省沈阳市大东区",
+				"attr_SupervisorUnit": "万宇国际工程咨询（北京）有限公司",
+				"attr_TowerRecordNum": "辽AA-T00248",
+				"attr_ProjectType": "在建",
+				"sys_createDate": "2022-11-09 14:39:25.289",
+				"attr_ArchitectureUnitTelPhone": "18609848410",
+				"attr_ProjectLinkMan": "陈聪",
+				"attr_Region": "210104",
+				"attr_SupervisorTelPhone": "13840274528",
+				"attr_ConstructionStage": "在建",
+				"attr_ProjectNum": "b3e5bc0c-b903-492e-ace5-2bbe9eea2d8d",
+				"attr_ProjectCreateTime": "2022-07-18 12:23:08",
+				"attr_EquipmentId": "辽AA-T00248",
+				"regionName": "大东区",
+				"regionOrder": "10",
+				"haveCoordinate": "y",
+				"coordinateId": "POINT12351594641827551",
+				"longitude": "123.515946",
+				"latitude": "41.827551"
+			},
+			{
+				"attr_DeviceType": "TD",
+				"attr_SupervisorLinkMan": "徐可傲",
+				"attr_ProjectTelPhone": "15174144988",
+				"attr_ArchitectureUnit": "沈阳金胜置业有限公司",
+				"attr_ItemName": "辽AA-T00260",
+				"sys_type": "EQUIPMENT_BUILD_TOWER_CRANE",
+				"sys_moid": "53317d50923dfd96c67f56ae75b97d90",
+				"attr_SetupStatus": "安装",
+				"attr_Coordinate": "POINT(123.531021 41.858526)",
+				"attr_ConstructionUnit": "沈阳建业建筑工程有限公司",
+				"attr_ArchitectureUnitLinkMan": "孟祥久",
+				"sys_modifyDate": "2022-12-08 12:06:47.766",
+				"attr_Address": "辽宁省沈阳市大东区",
+				"attr_SupervisorUnit": "沈阳市投资监理有限公司",
+				"attr_TowerRecordNum": "辽AA-T00260",
+				"attr_ProjectType": "在建",
+				"sys_createDate": "2022-11-09 14:36:26.984",
+				"attr_ArchitectureUnitTelPhone": "18809873785",
+				"attr_ProjectLinkMan": "王冰",
+				"attr_Region": "210104",
+				"attr_SupervisorTelPhone": "",
+				"attr_ConstructionStage": "在建",
+				"attr_ProjectNum": "259889ed-c699-4917-b41c-ecb7c5b77a57",
+				"attr_ProjectCreateTime": "2022-07-18 13:23:29",
+				"attr_EquipmentId": "辽AA-T00260",
+				"regionName": "大东区",
+				"regionOrder": "10",
+				"haveCoordinate": "y",
+				"coordinateId": "POINT12353102141858526",
+				"longitude": "123.531021",
+				"latitude": "41.858526"
+			},
+			{
+				"attr_DeviceType": "TD",
+				"attr_SupervisorLinkMan": "王刚",
+				"attr_ProjectTelPhone": "15840394156",
+				"attr_ArchitectureUnit": "沈阳卓盛置业有限公司",
+				"attr_ItemName": "辽AA-T00265",
+				"sys_type": "EQUIPMENT_BUILD_TOWER_CRANE",
+				"sys_moid": "f1991402f451c86282662ebc522edc2c",
+				"attr_SetupStatus": "拆除",
+				"attr_Coordinate": "POINT(123.473396 41.877536)",
+				"attr_ConstructionUnit": "沈阳建业建筑工程有限公司",
+				"attr_ArchitectureUnitLinkMan": "韩凯",
+				"sys_modifyDate": "2022-12-08 12:17:36.533",
+				"attr_Address": "辽宁省沈阳市皇姑区",
+				"attr_SupervisorUnit": "沈阳建华建设项目管理有限公司",
+				"attr_TowerRecordNum": "辽AA-T00265",
+				"attr_ProjectType": "在建",
+				"sys_createDate": "2022-11-09 14:45:59.390",
+				"attr_ArchitectureUnitTelPhone": "18202488422",
+				"attr_ProjectLinkMan": "金才",
+				"attr_Region": "210104",
+				"attr_SupervisorTelPhone": "13898818041",
+				"attr_ProjectNum": "61d16369-d7dd-43e5-beaf-9bf074356c83",
+				"attr_ConstructionStage": "在建",
+				"attr_ProjectCreateTime": "2022-07-23 12:52:19",
+				"attr_EquipmentId": "辽AA-T00265",
+				"regionName": "大东区",
+				"regionOrder": "10",
+				"haveCoordinate": "y",
+				"coordinateId": "POINT12347339641877536",
+				"longitude": "123.473396",
+				"latitude": "41.877536"
+			},
+			{
+				"attr_DeviceType": "TD",
+				"attr_ProjectTelPhone": "13071318299",
+				"attr_SupervisorLinkMan": "阚鹤",
+				"attr_ArchitectureUnit": "沈阳金地宏兴置业有限公司",
+				"attr_ItemName": "辽AB-T00186",
+				"sys_type": "EQUIPMENT_BUILD_TOWER_CRANE",
+				"sys_moid": "43014da18e1384e99c4a1813a448e584",
+				"attr_SetupStatus": "安装",
+				"attr_Coordinate": "POINT(123.47488 41.869218)",
+				"attr_ConstructionUnit": "中天建设集团有限公司",
+				"attr_ArchitectureUnitLinkMan": "肖阳",
+				"sys_modifyDate": "2022-12-08 12:15:36.101",
+				"attr_Address": "辽宁省沈阳市皇姑区永安街",
+				"attr_SupervisorUnit": "",
+				"attr_TowerRecordNum": "辽AB-T00186",
+				"attr_ProjectType": "在建",
+				"sys_createDate": "2022-11-09 14:44:08.705",
+				"attr_ArchitectureUnitTelPhone": "17640151526",
+				"attr_ProjectLinkMan": "董宏鹏",
+				"attr_Region": "210104",
+				"attr_SupervisorTelPhone": "17624040049",
+				"attr_ConstructionStage": "在建",
+				"attr_ProjectNum": "19f6a0c5-d089-467d-827f-e0784a30870b",
+				"attr_ProjectCreateTime": "2022-09-15 11:35:57",
+				"attr_EquipmentId": "辽AB-T00186",
+				"regionName": "大东区",
+				"regionOrder": "10",
+				"haveCoordinate": "y",
+				"coordinateId": "POINT1234748841869218",
+				"longitude": "123.47488",
+				"latitude": "41.869218"
 			}
-		}
+		],
+		"pageSize": 10,
+		"currentPage": 1,
+		"totalCount": 1442
 	}
-	return parentKey;
-};
-const App = () => {
-	const [expandedKeys, setExpandedKeys] = useState([]);
-	const [searchValue, setSearchValue] = useState("");
-	const [autoExpandParent, setAutoExpandParent] = useState(true);
-	const onExpand = (newExpandedKeys) => {
-		setExpandedKeys(newExpandedKeys);
-		setAutoExpandParent(false);
-	};
-
-	// 搜索
-	const onChange = (e) => {
-		const { value } = e.target;
-		const newExpandedKeys = dataList
-			.map((item) => {
-				if (item.title.indexOf(value) > -1) {
-					return getParentKey(item.key, defaultData);
-				}
-				return null;
-			})
-			.filter((item, i, self) => item && self.indexOf(item) === i);
-		setExpandedKeys(newExpandedKeys);
-		setSearchValue(value);
-		setAutoExpandParent(true);
-	};
-	const treeData = useMemo(() => {
-		const loop = (data) =>
-			data.map((item) => {
-				const strTitle = item.title;
-				const index = strTitle.indexOf(searchValue);
-				const beforeStr = strTitle.substring(0, index);
-				const afterStr = strTitle.slice(index + searchValue.length);
-				const title =
-					index > -1 ? (
-						<span>
-							{beforeStr}
-							<span className="site-tree-search-value">{searchValue}</span>
-							{afterStr}
-						</span>
-					) : (
-						<span>{strTitle}</span>
-					);
-				if (item.children) {
-					return {
-						title,
-						key: item.key,
-						children: loop(item.children),
-					};
-				}
-				return {
-					title,
-					key: item.key,
-				};
-			});
-		return loop(defaultData);
-	}, [searchValue]);
-	
-	return (
-		<div>
-			<Search
-				style={{
-					marginBottom: 8,
-				}}
-				placeholder="Search"
-				onChange={onChange}
-			/>
-			<Tree
-				onExpand={onExpand}
-				expandedKeys={expandedKeys}
-				autoExpandParent={autoExpandParent}
-				treeData={treeData}
-			/>
-		</div>
-	);
-};
-export default App;
+}

@@ -1,5 +1,7 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
+const host = "http://10.35.60.136:32119";
+
 module.exports = function (app) {
 	app.use(
 		"/play",
@@ -8,7 +10,13 @@ module.exports = function (app) {
 			changeOrigin: true,
 		})
 	);
-
+	app.use(
+		"/easydata",
+		createProxyMiddleware({
+			target: host,
+			changeOrigin: true,
+		})
+	);
 	app.use(
 		"/api",
 		createProxyMiddleware({
