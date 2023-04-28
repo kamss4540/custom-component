@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Com from "./pages/Test";
+import Com from "./pages/AudioLoading";
 import mockData from "./pages/Equipment/mockData";
 import $ from "jquery";
 
