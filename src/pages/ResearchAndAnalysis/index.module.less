@@ -1,0 +1,100 @@
+.raa {
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	position: relative;
+
+	.title {
+		background-color: rgba(46, 100, 161, 0.85);
+		height: 40px;
+		font-size: 20px;
+		line-height: 40px;
+		text-indent: 24px;
+		position: relative;
+
+		.control {
+			position: absolute;
+			top: 10px;
+			right: 12px;
+			transition-duration: 0.3s;
+		}
+
+		.down {
+			transform: rotateX(180deg);
+		}
+	}
+
+	.content {
+		width: 100%;
+		height: calc(100% - 40px);
+		padding: 0 12px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		background: rgba(10, 27, 107, 0.8);
+
+		&::-webkit-scrollbar {
+			width: 6px;
+		}
+		&::-webkit-scrollbar-thumb {
+			border-radius: 10px;
+			-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+			opacity: 0.2;
+			background: #061352;
+			border: 1px solid #414953;
+		}
+		&::-webkit-scrollbar-track {
+			-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+			border-radius: 0;
+		}
+	}
+
+	.littleWindow {
+		width: 200px;
+		height: 200px;
+		background: rgba(10, 27, 107, 0.8);
+		position: absolute;
+		left: -200px;
+		top: 0;
+	}
+
+	:global {
+		.ant-tree {
+			background: none;
+
+			.ant-tree-list {
+				color: #fff;
+
+				.ant-tree-node-content-wrapper:hover {
+					color: rgba(20, 153, 253);
+				}
+			}
+		}
+
+		.ant-collapse {
+			background: none;
+			border: none;
+
+			.ant-collapse-item {
+				border: none;
+			}
+
+			.ant-collapse-header {
+				color: #fff;
+			}
+
+			.ant-collapse-content {
+				background: none;
+				border: none;
+				color: #fff;
+			}
+		}
+
+		.ant-slider-mark-text {
+			color: #fff;
+		}
+
+		.ant-row {
+			width: 100%;
+		}
+	}
+}

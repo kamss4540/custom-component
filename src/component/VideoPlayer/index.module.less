@@ -1,0 +1,85 @@
+.video_player {
+	height: 100%;
+	position: relative;
+
+	.v_instance {
+		height: 100%;
+
+		// 隐藏loading面板
+		.jessibuca-performance-panel {
+			display: none !important;
+		}
+	}
+
+	.v_info {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 2;
+		background-color: #262626;
+
+		.status {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+			.msg {
+				color: #ccc;
+			}
+		}
+	}
+
+	.operation {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		z-index: 1;
+		height: 30px;
+
+		&:hover {
+			.v_op_container {
+				height: 30px;
+			}
+		}
+
+		.v_op_container {
+			background: rgba(10, 8, 8, 0.8);
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: 0px;
+			transition: all 0.3s;
+			overflow: hidden;
+			position: absolute;
+
+			.btn {
+				width: 30px;
+				height: 30px;
+				cursor: pointer;
+				transition: all 0.3s;
+				font-size: 16px;
+				color: #bbb;
+				display: flex;
+				align-items: center;
+
+				&:hover {
+					color: #fff;
+				}
+
+				&:active {
+					font-size: 20px;
+				}
+
+				&:not(:last-child) {
+					margin-right: 20px;
+				}
+			}
+		}
+	}
+}

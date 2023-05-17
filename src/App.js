@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import Com from "./pages/AudioLoading";
-import mockData from "./pages/Equipment/mockData";
+import Com from "./pages/ResearchAndAnalysis";
+// import Com from "./component/VideoPlayer";
+import mockData from "./pages/ResearchAndAnalysis/mockData";
 import $ from "jquery";
 
 window.$ = $;
@@ -12,7 +13,15 @@ function App() {
 	}, []);
 
 	return (
-		<div style={{ width: 1180, height: 860, border: "1px solid red" }}>
+		<div
+			style={{
+				width: 600,
+				height: 860,
+				border: "1px solid red",
+				position: "absolute",
+				left: 300,
+			}}
+		>
 			<Com
 				data={mockData}
 				config={{
