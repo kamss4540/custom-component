@@ -19,7 +19,7 @@ function App() {
 				height: 860,
 				border: "1px solid red",
 				position: "absolute",
-				left: 300,
+				left: 500,
 			}}
 		>
 			<Com

@@ -13,7 +13,7 @@ const ResearchAndAnalysis = (props) => {
 			modelCode: item.modelCode,
 			checkedKeys: e,
 		};
-		window.globalEventEmitter.emit("onRaaTreeCheck", params);
+		window.globalEventEmitter.emit("onModelTreeChange", params);
 		let _checkedObj = JSON.parse(JSON.stringify(checkedObj));
 		_checkedObj[type][item.modelCode] = e;
 		setCheckedObj(_checkedObj);

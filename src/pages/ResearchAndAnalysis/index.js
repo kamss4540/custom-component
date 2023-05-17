@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Collapse, Slider, Row, Button } from "antd";
 import styles from "./index.module.less";
 import CustomTree from "./CustomTree";
-import { UpOutlined } from "@ant-design/icons";
+import { UpOutlined, CloseOutlined } from "@ant-design/icons";
+import DeductiveModel from "./DeductiveModel";
 
 const ResearchAndAnalysis = (props) => {
 	const { data } = props;
-	const [isShow, setIsShow] = useState(true);
+	// console.log("data=>", data);
+	const [isShow, setIsShow] = useState(false);
 	const [littleWindowVisible, setLittleWindowVisible] = useState(false);
-	const [activeKey1, setActiveKey1] = useState([
-		data?.autoModel?.[0]?.modelCode,
-	]);
+	const [activeKey1, setActiveKey1] = useState([]);
 	const [activeKey2, setActiveKey2] = useState([]);
 	// 树的选中状态
 	const [checkedObj, setCheckedObj] = useState({ autoModel: {}, evoModel: {} });
@@ -24,8 +24,13 @@ const ResearchAndAnalysis = (props) => {
 		5000: "5000米",
 	};
 
+	useEffect(() => {
+		data?.autoModel && setActiveKey1([data?.autoModel?.[0]?.modelCode]);
+		data && setIsShow(true);
+	}, [data]);
+
 	const onSliderChange = (value) => {
-		window.globalEventEmitter.emit("onRaaSliderChange", value);
+		window.globalEventEmitter.emit("onDistanceChange", value);
 	};
 
 	const onCustomTreeChange = (e, type) => {
@@ -58,6 +63,20 @@ const ResearchAndAnalysis = (props) => {
 		window.globalEventEmitter.emit("onModelLegendChange", params);
 	};
 
+	const curDeductiveModel = useMemo(() => {
+		return data.evoModel.find((item) => item.modelCode === activeKey2);
+	}, [activeKey2]);
+
+	useEffect(() => {
+		if (curDeductiveModel) {
+			setLittleWindowVisible(true);
+		} else {
+			setLittleWindowVisible(false);
+		}
+	}, [curDeductiveModel]);
+
+	console.log("curDeductiveModel=>", curDeductiveModel);
+
 	return (
 		<div className={styles.raa}>
 			<Row className={styles.title}>
@@ -73,6 +92,9 @@ const ResearchAndAnalysis = (props) => {
 				className={styles.content}
 				style={{ display: isShow ? "block" : "none" }}
 			>
+				<Row>
+					<span className={styles.subtitle}>综合研判</span>
+				</Row>
 				<Row>
 					<CustomTree
 						data={data.autoModel}
@@ -124,7 +146,18 @@ const ResearchAndAnalysis = (props) => {
 				className={styles.littleWindow}
 				style={{ display: littleWindowVisible ? "block" : "none" }}
 			>
-				测试弹窗显示
+				<div className={styles.littleTitle}>
+					<span>推演模型</span>
+					<CloseOutlined
+						className={styles.close}
+						onClick={() => setLittleWindowVisible(false)}
+					/>
+				</div>
+				<div className={styles.littleContent}>
+					{curDeductiveModel ? (
+						<DeductiveModel data={curDeductiveModel} />
+					) : null}
+				</div>
 			</div>
 		</div>
 	);
