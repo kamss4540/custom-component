@@ -34,6 +34,9 @@ const ResearchAndAnalysis = (props) => {
 	};
 
 	const onCustomTreeChange = (e, type) => {
+		if (!e) {
+			return;
+		}
 		let params;
 		if (type === "autoModel") {
 			if (activeKey2.length) {
@@ -43,10 +46,11 @@ const ResearchAndAnalysis = (props) => {
 			let tar = data.autoModel.find((item) => item.modelCode === e);
 			params = {
 				modeType: "autoModel",
-				modelName: tar.modelName,
-				modelCode: tar.modelCode,
-				checkedKeys: checkedObj.autoModel[e] || tar.legendTree.checkedKeys,
+				modelName: tar?.modelName,
+				modelCode: tar?.modelCode,
+				checkedKeys: checkedObj.autoModel[e] || tar?.legendTree.checkedKeys,
 			};
+			window.globalEventEmitter.emit("onModelLegendChange", params);
 		} else if (type === "evoModel") {
 			if (activeKey1.length) {
 				setActiveKey1([]);
@@ -55,12 +59,12 @@ const ResearchAndAnalysis = (props) => {
 			let tar = data.evoModel.find((item) => item.modelCode === e);
 			params = {
 				modeType: "evoModel",
-				modelName: tar.modelName,
-				modelCode: tar.modelCode,
-				checkedKeys: checkedObj.evoModel[e] || tar.legendTree.checkedKeys,
+				modelName: tar?.modelName,
+				modelCode: tar?.modelCode,
+				checkedKeys: checkedObj.evoModel[e] || tar?.legendTree.checkedKeys,
 			};
+			window.globalEventEmitter.emit("onModelLegendChange", params);
 		}
-		window.globalEventEmitter.emit("onModelLegendChange", params);
 	};
 
 	const curDeductiveModel = useMemo(() => {

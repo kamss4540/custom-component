@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import Com from "./pages/ResearchAndAnalysis";
+import Com from "./pages/Correlation";
 // import Com from "./component/VideoPlayer";
-import mockData from "./pages/ResearchAndAnalysis/mockData";
+import mockData from "./pages/Correlation/mockData";
 import $ from "jquery";
 
 window.$ = $;
@@ -15,8 +15,8 @@ function App() {
 	return (
 		<div
 			style={{
-				width: 600,
-				height: 860,
+				width: 1095,
+				height: 300,
 				border: "1px solid red",
 				position: "absolute",
 				left: 500,
