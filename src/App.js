@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Com from "./pages/Correlation";
+import Com from "./pages/RoutePlanning";
 // import Com from "./component/VideoPlayer";
 import mockData from "./pages/Correlation/mockData";
 import $ from "jquery";

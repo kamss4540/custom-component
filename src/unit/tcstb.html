@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>路径规划</title>
+		<script
+			data-map
+			src="http://172.30.3.102:31700/gis/static/js/5.7.0/yunli-map.js"
+		></script>
+		<link
+			rel="stylesheet"
+			href="http://172.30.3.102:31700/gis/static/css/yunli-map.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="http://172.30.3.102:31700/gis/static/css/demo.css"
+		/>
+	</head>
+
+	<body>
+		<div class="pos_rb">
+			<div class="interaction-panel">
+				<div class="row">
+					<select id="select" onchange="planning()">
+						<option selected value="car_mintime">驾车(最短时间)</option>
+						<option value="car_mindis">驾车(最短距离)</option>
+						<option value="car_multiple">驾车(多路径)</option>
+						<option value="no_expressway">驾车(不走高速)</option>
+						<option value="walking">步行</option>
+						<option value="transit">公交</option>
+					</select>
+				</div>
+				<div class="row">
+					<select id="platSelect" onchange="planning()">
+						<option selected value="amap">高德</option>
+						<option value="tianditu">天地图</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="map" id="map"></div>
+		<script>
+			var map2d = new YunliMap.Map({
+				container: "map",
+				layers: ["tianditu", "tianditu_anno"],
+				zoom: 13,
+				center: [116.35, 39.91],
+			});
+
+			// 开始标记
+			let startMarker = new YunliMap.Marker({
+				icon: "http://172.30.3.102:31700/gis/static/images/start.png",
+				position: [116.336, 39.921383],
+				offset: [-19, -60],
+				scale: 0.5,
+				draggable: true,
+			});
+			map2d.add(startMarker);
+
+			startMarker.on("dragend", function () {
+				planning();
+			});
+
+			// 结束标记
+			let endMarker = new YunliMap.Marker({
+				icon: "http://172.30.3.102:31700/gis/static/images/end.png",
+				position: [116.39, 39.91747],
+				offset: [-19, -60],
+				scale: 0.5,
+				draggable: true,
+			});
+			map2d.add(endMarker);
+
+			endMarker.on("dragend", function () {
+				planning();
+			});
+
+			map2d.fitView({ padding: [100, 100, 100, 100] });
+
+			planning();
+
+			let routePaths = [];
+
+			function planning() {
+				let planningType = select.value;
+				let platName = platSelect.value;
+
+				// 多路径、avoidroad只在高德模式下有效
+				YunliMap.pathPlanning(
+					{
+						origin: startMarker.getPosition(),
+						destination: endMarker.getPosition(),
+						type: planningType,
+						avoidroad: "西单北大街", // 规避道路
+						online: {
+							city: planningType === "transit" ? "北京市" : "", // 高德公交规划时时必传
+							platName,
+						}, // 值为false时，访问本地路径规划服务。
+					},
+					function (info) {
+						// 高德公交规划只显示第一条路线
+						if (planningType === "transit") info = info[0];
+
+						routePaths.forEach((routePath) => map2d.remove(routePath));
+						routePaths = [];
+
+						info instanceof Array
+							? info.forEach((item) => addPath(item))
+							: addPath(info);
+
+						map2d.fitView({
+							padding: [50, 50, 50, 50],
+						});
+					}
+				);
+			}
+
+			//添加路径
+			function addPath(pathData) {
+				var routePath = new YunliMap.Polyline({
+					coordinates: pathData.points,
+					style: {
+						color: "rgb(39,170,55)",
+						lineWidth: 10,
+						strokeWidth: 1,
+						strokeColor: "#FFF",
+					},
+					showArrow: true,
+				});
+				map2d.add(routePath);
+				routePaths.push(routePath);
+			}
+		</script>
+	</body>
+</html>
