@@ -1,0 +1,80 @@
+.groupHeader {
+	width: 587px;
+
+	.triangle {
+		width: 10px;
+		height: 11px;
+		display: inline-block;
+		vertical-align: top;
+		margin-top: 26px;
+		cursor: pointer;
+	}
+
+	.middle {
+		width: 567px;
+		display: inline-block;
+		overflow: hidden;
+
+		.tabs {
+			display: flex;
+			flex-direction: row;
+			transition-duration: 0.5s;
+			transition-timing-function: ease-out;
+
+			.cell {
+				width: 103px;
+				margin-right: 10px;
+				cursor: pointer;
+
+				.spotlight {
+					width: 79px;
+					height: 60px;
+					background-repeat: no-repeat;
+					background-size: 100% 100%;
+					position: relative;
+					margin: 0 auto;
+
+					img {
+						position: absolute;
+						transform: translateX(-50%);
+						left: 50%;
+					}
+				}
+
+				.industryTitle {
+					width: 103px;
+					height: 38px;
+					background-repeat: no-repeat;
+					background-size: 100% 100%;
+					color: #fff;
+					font-size: 14px;
+					font-family: alibabapushiti;
+					padding-top: 3px;
+					padding-left: 10px;
+
+					.defaultDot {
+						background-color: #25e0f6;
+						width: 8px;
+						height: 8px;
+						display: inline-block;
+						border-radius: 50%;
+					}
+
+					span {
+						display: inline-block;
+						width: 80px;
+						text-align: center;
+					}
+				}
+			}
+		}
+	}
+}
+
+.content {
+	width: 586px;
+	height: 258px;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	border: 1px solid rgba(44, 133, 255, 0.76);
+}

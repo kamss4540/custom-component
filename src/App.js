@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Com from "./pages/MySlider";
+import Com from "./pages/IndustryCoverage";
 // import Com from "./component/VideoPlayer";
 import mockData from "./pages/Correlation/mockData";
 import $ from "jquery";
@@ -9,7 +9,7 @@ window.$ = $;
 function App() {
 	useEffect(() => {
 		document.cookie =
-			"datai-gateway-token=eyJraWQiOiIyMDIzMDIwMzEwMjIzNTEwNzEwMTI4MjExMjQzODY4MTYiLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsInNpZCI6ImJlNDk4YmFlMDdhMzQ1MTNhYzA0NGJkZDRhZDZlNmU4In0.eyJyb2xlSWRzIjpbIjIwMjIxMTE4MjAzMTMxMTA0MzI2MjE5OTI3Mjk3MjI4OCJdLCJvcmdJZHMiOltdLCJucyI6ImRlZmF1bHQiLCJyZXF1ZXN0SWQiOiIzNjhjZDRhMiIsImxvZ2luQXQiOjE2ODI1NTk1MzcwNTUsInVzZXJuYW1lIjoiZGV2ZWxvcC14emgifQ.0M8xZB-hTK2SD3kT5H3O1Dtfc_3WkOCHtbXMGfIKjMs";
+			"datai-gateway-token=eyJraWQiOiIyMDIzMDUxODE1MzQ0NjExMDg3Nzk3MjQzNjYyODY4NDgiLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsInNpZCI6ImYxNjFjYjU0ZGI0YzQ2YTlhOTViOTA1ODMwOTAwMzkyIn0.eyJyb2xlSWRzIjpbIjIwMjIxMTE4MjAzMTMxMTA0MzI2MjE5OTI3Mjk3MjI4OCJdLCJvcmdJZHMiOltdLCJucyI6ImRlZmF1bHQiLCJyZXF1ZXN0SWQiOiI5NGYwMWMzMSIsImxvZ2luQXQiOjE2ODgzNDg5NTA3NTYsInVzZXJuYW1lIjoiZGV2ZWxvcF9wZW5nZmVpIn0.ooaCUB2Q7tKOUkjNIzmO1s-szdqJMnTLY9iTOSNi5PE";
 	}, []);
 
 	return (
@@ -19,7 +19,7 @@ function App() {
 				height: 300,
 				border: "1px solid red",
 				position: "absolute",
-				left: 500,
+				left: 50,
 			}}
 		>
 			<Com
