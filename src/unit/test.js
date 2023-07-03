@@ -1,83 +1,61 @@
-globalEventEmitter.on(
-	"store_group_t7gyQp1wpuM3qTofADmHmN-bn4XQLFdPNCjcRcFiKghKF",
-	(e) => {
-		console.info(
-			"store_group_t7gyQp1wpuM3qTofADmHmN-bn4XQLFdPNCjcRcFiKghKF=>",
-			e
-		);
-		if (!window.map3d_1607675060094816256) {
-			// 创建一个div元素
-			var divElement = document.createElement("div");
-
-			// 设置div元素的宽度和高度
-			divElement.style.width = "1317px";
-			divElement.style.height = "956px";
-			divElement.style.position = "absolute";
-			divElement.style.left = "1260px";
-			divElement.style.top = "111px";
-
-			var map3d = new YunliMap3D.Map({
-				container: divElement,
-				center: [Number(e.longitude), Number(e.latitude)],
-				pitch: -45,
-				layers: ["tianditu_img"],
-				zoom: 15,
-			});
-
-			// 获取要添加到的另一个元素
-			var parentElement = document.querySelector(
-				'[data-key="group_fU131scKADaAKt7ygMeKME"]'
-			);
-
-			// 将div元素添加到另一个元素中
-			parentElement.appendChild(divElement);
-			window.map3d_1607675060094816256 = map3d;
-		}
-	}
+// 车辆类型选中值
+let val = getDataByKey(
+	"store_group_d1408d8824004271bcb7364c3b1850f5-jEdEQGRANdLcWanYEhi4Jm"
 );
+let layer = null;
+switch (val) {
+	case "1":
+		layer = [
+			{
+				key: "@com_628695f9fdee42ccac3598372d8ed657",
+				name: "危险品车辆",
+			},
+		];
+		break;
+	case "2":
+		layer = [
+			{
+				key: "@com_03a9f59d485d47059611587ccf2dcf7c",
+				name: "包车客运",
+			},
+		];
+		break;
+	case "3":
+		layer = [
+			{
+				key: "@com_18615b82a76341b399fd17dd9a6df061",
+				name: "班车客运",
+			},
+		];
+		break;
 
-// http://124.95.131.16:9061/baisheng210110096/tileset.json
-// http://124.95.178.231:9000/baisheng210110096/tileset.json
+	default:
+		layer = [
+			{
+				key: "@com_628695f9fdee42ccac3598372d8ed657",
+				name: "危险品车辆",
+			},
+			{
+				key: "@com_03a9f59d485d47059611587ccf2dcf7c",
+				name: "包车客运",
+			},
+			{
+				key: "@com_18615b82a76341b399fd17dd9a6df061",
+				name: "班车客运",
+			},
+		];
+		break;
+}
+let output = [
+	{
+		key: "@com_efaefba76f0a4482818f621c2a296c59",
+		name: "行政区范围",
+	},
+];
+if (layer) {
+	output.concat(layer);
+}
+console.info("output=>", output);
+return output;
 
-let map3d = null;
-const create3DMap = () => {
-	// 创建一个div元素
-	var divElement = document.createElement("div");
-
-	// 设置div元素的宽度和高度
-	divElement.style.width = "1100px";
-	divElement.style.height = "500px";
-	divElement.style.position = "absolute";
-	divElement.style.left = "13px";
-	divElement.style.top = "0";
-
-	map3d = new YunliMap3D.Map({
-		container: divElement,
-		// center: [Number(e.longitude), Number(e.latitude)],
-		pitch: -45,
-		// layers: ["tianditu_img"],
-		zoom: 18,
-	});
-
-	
-
-	// 获取要添加到的另一个元素
-	var parentElement = document.querySelector(
-		'[data-key="group_fU131scKADaAKt7ygMeKME"]'
-	);
-
-	// 将div元素添加到另一个元素中
-	parentElement.appendChild(divElement);
-
-	var wmtslayer = new YunliMap3D.WMTSLayer({
-		url: 'http://120.52.31.31:590/service/api/egis/base/v1/wmts?Authorization=Basic%20MDAyYTJjY2JkY2NmNDJhYWE2OTEyMGY3YjRmN2EwOWI6NGVlZDQ1ODU4ZGI0NGU0Njk4MzVkNTQ5Y2JkZmNkMDM=',
-		layer: 'img',
-		matrixSet: 'c',
-		format: 'tiles',
-		style: 'default',
-		tilingScheme:'Geographic',
-		tileMatrixSetID : 'c',
-		tileMatrixLabels:['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']
-	});
-	map3d.add(wmtslayer)
-};
+// npm create vite@latest i-want --template vue
