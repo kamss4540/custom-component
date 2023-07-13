@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./index.module.less";
+import MyImg from "./MyImg";
 
 const Monitor = (props) => {
-	console.log("props=>", props);
-	const { data } = props;
+	const { fields, type, data } = props;
 
 	return (
 		<div className={styles.monitor}>
@@ -15,7 +15,7 @@ const Monitor = (props) => {
 					)})`,
 				}}
 			>
-				监测对象
+				{type}
 			</div>
 			<img
 				className={styles.line}
@@ -25,14 +25,16 @@ const Monitor = (props) => {
 				width={164}
 				height={17}
 				alt=""
+				loading="lazy"
+				decoding="async"
 			/>
 			<div className={styles.grid}>
-				{data.map((item, index) => (
+				{fields.map((item, index) => (
 					<div key={index} className={styles.cell}>
-						<img src={encodeURI(item.iconPath)} width={50} height={52} alt="" />
+						<MyImg src={item.iconPath} width={50} height={52} />
 						<span className={styles.name}>{item.name}</span>
-						<div>
-							<span className={styles.value}>999</span>
+						<div className={styles.desc}>
+							<span className={styles.value}>{data[item.itemType] || 0}</span>
 							<span className={styles.unit}>个</span>
 						</div>
 					</div>

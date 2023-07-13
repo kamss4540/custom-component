@@ -1,5 +1,8 @@
 .monitor {
 	position: relative;
+	width: 280px;
+	height: 258px;
+	display: inline-block;
 
 	.title {
 		width: 127px;
@@ -10,7 +13,7 @@
 		font-size: 18px;
 		font-weight: bold;
 		position: absolute;
-		left: 39px;
+		left: 88px;
 		top: 13px;
 		text-align: center;
 		line-height: 13px;
@@ -18,23 +21,143 @@
 
 	.line {
 		position: absolute;
-		left: 23px;
-		top: 33px;
+		left: 70px;
+		top: 40px;
 	}
 
-	.name {
-		color: #40b3ff;
-		font-size: 14px;
-	}
+	.grid {
+		.cell {
+			position: absolute;
+			background-color: #17166b;
+			border: 1px solid #292ea7;
 
-	.value {
-		color: #ffc705;
-		font-size: 24px;
-		font-family: din;
-	}
+			img {
+				position: absolute;
+				transform: rotateX(90deg);
+				transition-duration: 1s;
+				transition-timing-function: ease-in;
+			}
 
-	.unit {
-		color: #ffc705;
-		font-size: 14px;
+			.name {
+				position: absolute;
+				color: #40b3ff;
+				font-size: 14px;
+				line-height: 16px;
+				white-space: wrap;
+			}
+
+			.desc {
+				position: absolute;
+
+				.value {
+					color: #ffc705;
+					font-size: 24px;
+					font-family: din;
+				}
+
+				.unit {
+					color: #ffc705;
+					font-size: 14px;
+				}
+			}
+		}
+
+		&:has(.cell:nth-child(1)) {
+			.cell {
+				width: 250px;
+				height: 171px;
+				left: 24px;
+				top: 65px;
+
+				img {
+					left: 46px;
+					top: 35px;
+				}
+
+				.name {
+					left: 96px;
+					top: 38px;
+				}
+
+				.desc {
+					left: 96px;
+					top: 64px;
+				}
+			}
+		}
+
+		&:has(.cell:nth-child(2)) {
+			.cell {
+				width: 250px;
+				height: 80px;
+
+				&:nth-child(1) {
+					left: 24px;
+					top: 66px;
+				}
+
+				&:nth-child(2) {
+					left: 24px;
+					top: 157px;
+				}
+
+				img {
+					left: 25px;
+					top: 7px;
+				}
+
+				.name {
+					left: 75px;
+					top: 12px;
+				}
+
+				.desc {
+					left: 80px;
+					top: 34px;
+				}
+			}
+		}
+
+		&:has(.cell:nth-child(3)) {
+			.cell {
+				width: 122px;
+				height: 80px;
+
+				&:nth-child(1) {
+					left: 19px;
+					top: 67px;
+				}
+
+				&:nth-child(2) {
+					left: 157px;
+					top: 67px;
+				}
+
+				&:nth-child(3) {
+					left: 19px;
+					top: 160px;
+				}
+
+				&:nth-child(4) {
+					left: 157px;
+					top: 160px;
+				}
+
+				img {
+					left: 1px;
+					top: 10px;
+				}
+
+				.name {
+					left: 44px;
+					top: 13px;
+				}
+
+				.desc {
+					left: 14px;
+					top: 44px;
+				}
+			}
+		}
 	}
 }

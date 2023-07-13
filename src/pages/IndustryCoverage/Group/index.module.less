@@ -14,6 +14,7 @@
 		width: 567px;
 		display: inline-block;
 		overflow: hidden;
+		position: relative;
 
 		.tabs {
 			display: flex;
@@ -77,4 +78,16 @@
 	background-color: rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 	border: 1px solid rgba(44, 133, 255, 0.76);
+	overflow: hidden;
+
+	.pictureScroll {
+		display: flex;
+		transition-duration: 0.5s;
+		transition-timing-function: ease-out;
+
+		.page {
+			width: 586px;
+			flex-shrink: 0;
+		}
+	}
 }
