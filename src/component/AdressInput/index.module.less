@@ -1,0 +1,114 @@
+.layout {
+	width: 300px;
+	box-sizing: border-box;
+
+	.mount {
+		position: relative;
+		width: 100%;
+		z-index: 1;
+
+		ul {
+			background: #fff;
+			list-style: none;
+			max-height: 256px;
+			overflow-y: auto;
+			padding: 0;
+			transition: max-height 0.3s;
+			position: absolute;
+			width: 100%;
+
+			&.close {
+				max-height: 0;
+			}
+
+			&::-webkit-scrollbar {
+				width: 6px;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				border-radius: 10px;
+				-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+				opacity: 0.2;
+				background: #d2d2d2;
+				border: 1px solid #414953;
+			}
+
+			&::-webkit-scrollbar-track {
+				-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+				border-radius: 0;
+			}
+
+			li {
+				cursor: pointer;
+				text-indent: 8px;
+
+				.address {
+					color: #bbb;
+					font-size: 12px;
+				}
+
+				&:hover {
+					background-color: #f5f5f5;
+				}
+
+				&.selected {
+					background-color: #e6f7ff;
+				}
+			}
+		}
+	}
+
+	.dot {
+		width: 8px;
+		height: 8px;
+		display: block;
+		background: #00bb6e;
+		border-radius: 4px;
+	}
+}
+
+.stepsBox {
+	width: 300px;
+	height: 300px;
+	overflow-y: auto;
+
+	.order {
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		display: block;
+		background: linear-gradient(
+			90deg,
+			rgba(26, 66, 200, 0.45) 0%,
+			rgba(62, 110, 254, 0.45) 99%,
+			rgba(62, 110, 255, 0.45) 100%
+		);
+		font-size: 13px;
+		color: #fff;
+		font-weight: 600;
+		text-align: center;
+		font-style: normal;
+		position: relative;
+
+		div {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 18px;
+			height: 18px;
+			background: linear-gradient(90deg, #1a42c8 0%, #3e6efe 99%, #3e6eff 100%);
+			border-radius: 50%;
+			opacity: 1;
+			line-height: 18px;
+			text-align: center;
+		}
+	}
+
+	:global {
+		.ant-steps-item-title {
+			color: #fff !important;
+			font-size: 12px;
+		}
+	}
+}

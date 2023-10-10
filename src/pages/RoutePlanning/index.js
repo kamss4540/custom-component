@@ -302,9 +302,9 @@ const RoutePlanning = (props) => {
 							{/* <Option value="car_multiple">多条路径</Option> */}
 						</Select>
 					</Form.Item>
-					<Form.Item label="是否显示路况">
+					{/* <Form.Item label="是否显示路况">
 						<Switch />
-					</Form.Item>
+					</Form.Item> */}
 				</Form>
 				<div>
 					<Button className={styles.btn2} onClick={planning}>
