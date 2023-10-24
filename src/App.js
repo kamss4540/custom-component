@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Com from "./component/AdressInput";
+import Com from "./pages/MyCarousel";
 // import Com from "./component/VideoPlayer";
 import mockData from "./pages/IndustryCoverage/mockData";
 import $ from "jquery";
@@ -23,13 +23,29 @@ function App() {
 			}}
 		>
 			<Com
-				data={mockData}
+				// data={mockData}
+				data={[
+					{
+						url: "https://t7.baidu.com/it/u=1595072465,3644073269&fm=193&f=GIF",
+					},
+					{
+						url: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
+					},
+					{
+						url: "https://t7.baidu.com/it/u=1819248061,230866778&fm=193&f=GIF",
+					},
+				]}
 				config={{
 					transform: "translate(4px, 7px)",
 					position: "absolute",
 					width: "1031px",
 					height: "300px",
 					opacity: 100,
+				}}
+				comProps={{
+					css: {
+						height: "300px",
+					},
 				}}
 			/>
 		</div>
