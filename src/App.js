@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Com from "./pages/MyCarousel";
+import Com from "./pages/NumberAnimation";
 // import Com from "./component/VideoPlayer";
 import mockData from "./pages/IndustryCoverage/mockData";
 import $ from "jquery";
@@ -20,21 +20,28 @@ function App() {
 				border: "1px solid red",
 				position: "absolute",
 				left: 50,
+				top: 200,
 			}}
 		>
 			<Com
 				// data={mockData}
-				data={[
-					{
-						url: "https://t7.baidu.com/it/u=1595072465,3644073269&fm=193&f=GIF",
-					},
-					{
-						url: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
-					},
-					{
-						url: "https://t7.baidu.com/it/u=1819248061,230866778&fm=193&f=GIF",
-					},
-				]}
+				data={{
+					value: '12345/67890',
+					config: {
+						textStyles: {
+							fontSize: 18,
+							fontFamily: 'huxiaobo',
+							fontWeight: 'bold',
+							backgroundImage: 'linear-gradient(rgb(255, 255, 255) 0%, rgb(248, 231, 28) 100%)',
+							backgroundClip: 'text',
+							WebkitBackgroundClip: 'text',
+							WebkitTextFillColor: 'transparent',
+						},
+						wrapperStyles: {
+							width: 10
+						}
+					}
+				}}
 				config={{
 					transform: "translate(4px, 7px)",
 					position: "absolute",
