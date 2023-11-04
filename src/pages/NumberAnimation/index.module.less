@@ -21,8 +21,26 @@
 		transform: translate(-50%, 0);
 		transition: transform 1000ms;
 
-        .digit {
-            line-height: 20px
-        }
+		.digit {
+			line-height: 20px;
+		}
+	}
+}
+
+.text {
+	width: 200px;
+	height: 80px;
+	font-size: 26px;
+	background: linear-gradient(135deg, red, yellow, #1980ff, yellow, red);
+	color: rgb(255 255 255 / 80%);
+	-webkit-background-clip: text;
+	text-transform: uppercase;
+	animation: text-ani 15s ease-in-out infinite;
+}
+
+@keyframes text-ani {
+	to {
+		background-position: 100vw 0;
+		filter: hue-rotate(360deg);
 	}
 }

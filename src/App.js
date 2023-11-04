@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Com from "./pages/NumberAnimation";
+import Com from "./pages/PeripheralAnalysis";
 // import Com from "./component/VideoPlayer";
 import mockData from "./pages/IndustryCoverage/mockData";
 import $ from "jquery";
@@ -15,32 +15,33 @@ function App() {
 	return (
 		<div
 			style={{
-				width: 1095,
-				height: 300,
+				width: 1080,
+				height: 400,
 				border: "1px solid red",
 				position: "absolute",
-				left: 50,
-				top: 200,
+				left: 100,
+				top: 100,
 			}}
 		>
 			<Com
 				// data={mockData}
 				data={{
-					value: '12345/67890',
+					value: "12345/67890",
 					config: {
 						textStyles: {
-							fontSize: 18,
-							fontFamily: 'huxiaobo',
-							fontWeight: 'bold',
-							backgroundImage: 'linear-gradient(rgb(255, 255, 255) 0%, rgb(248, 231, 28) 100%)',
-							backgroundClip: 'text',
-							WebkitBackgroundClip: 'text',
-							WebkitTextFillColor: 'transparent',
+							fontSize: 30,
+							fontFamily: "huxiaobo",
+							fontWeight: "bold",
+							backgroundImage:
+								"linear-gradient(rgb(255, 255, 255) 0%, rgb(248, 231, 28) 100%)",
+							backgroundClip: "text",
+							WebkitBackgroundClip: "text",
+							WebkitTextFillColor: "transparent",
 						},
 						wrapperStyles: {
-							width: 10
-						}
-					}
+							width: 18,
+						},
+					},
 				}}
 				config={{
 					transform: "translate(4px, 7px)",
@@ -60,3 +61,5 @@ function App() {
 }
 
 export default App;
+
+

@@ -1,44 +1,21 @@
 import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./index.module.less";
-import ReactDOM from "react-dom";
 
 export default (props) => {
 	const { data, count, config = {} } = props;
 	const { textStyles, wrapperStyles } = config;
 
+	const _wrapperStyles = {
+		height: textStyles.fontSize ? textStyles.fontSize + 2 : 20,
+		...wrapperStyles,
+	};
+
+	const _digitStyle = {
+		lineHeight: (textStyles.fontSize ? textStyles.fontSize + 2 : 20) + "px",
+		...textStyles,
+	};
+
 	const myRef = useRef();
-
-	useEffect(() => {
-		if (isNaN(data)) return;
-		myRef.current.innerHTML = "<div></div>";
-		let children = React.createElement(Content, { data, textStyles });
-		ReactDOM.render(children, myRef.current.children[0]);
-	}, [count]);
-
-	if (isNaN(data)) {
-		return (
-			<div className={styles.digitWrapper} style={wrapperStyles}>
-				<span className={styles.digitList}>
-					<span className={styles.digit} style={textStyles}>
-						{data}
-					</span>
-				</span>
-			</div>
-		);
-	} else {
-		return (
-			<div
-				ref={myRef}
-				className={styles.digitWrapper}
-				style={wrapperStyles}
-			></div>
-		);
-	}
-};
-
-const Content = (props) => {
-	const { data, textStyles } = props;
-	const listRef = useRef();
 
 	const list = useMemo(() => {
 		let arr = [];
@@ -49,18 +26,26 @@ const Content = (props) => {
 	});
 
 	useEffect(() => {
+		myRef.current.style.transition = "none";
+		myRef.current.style.transform = "translate(-50%, 0px)";
 		setTimeout(() => {
-			listRef.current.style = `transform: translate(-50%, ${-data * 20}px)`;
+			myRef.current.style = `transform: translate(-50%, ${
+				-data * (textStyles.fontSize + 2 || 20)
+			}px)`;
 		}, 0);
-	}, []);
+	}, [count]);
 
 	return (
-		<span ref={listRef} className={styles.digitList}>
-			{list.map((item) => (
-				<span key={item} className={styles.digit} style={textStyles}>
-					{item}
-				</span>
-			))}
-		</span>
+		<div className={styles.digitWrapper} style={_wrapperStyles}>
+			<span ref={myRef} className={styles.digitList}>
+				{list.map((item) => (
+					<span key={item} className={styles.digit} style={_digitStyle}>
+						{item}
+					</span>
+				))}
+			</span>
+		</div>
 	);
 };
+
+

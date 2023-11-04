@@ -1,0 +1,124 @@
+.tableGroup {
+	display: flex;
+	justify-content: space-between;
+
+	::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+		opacity: 0.2;
+		background: #061352;
+		border: 1px solid #414953;
+	}
+
+	::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+		border-radius: 0;
+		// background: rgba(24, 66, 142, 0.4);
+	}
+
+	:global {
+		.ant-table-wrapper {
+			width: 49%;
+		}
+		.ant-table {
+			background: unset;
+			color: #fff;
+			border: 1px solid #0065ff;
+		}
+
+		.ant-table-thead {
+			height: 29px;
+
+			tr > th {
+				background: rgba(24, 66, 142, 0.4);
+				border: none;
+				color: #fff;
+				padding: 0;
+			}
+		}
+
+		.ant-table-cell-scrollbar {
+			box-shadow: 0 1px 0 1px #333;
+		}
+
+		.ant-table-body {
+			height: 174px;
+
+			tr > td {
+				border: none;
+				padding: 0;
+			}
+
+			tr.ant-table-row-selected > td {
+				background: rgba(20, 153, 253, 0.6);
+			}
+
+			tr.ant-table-row:hover > td {
+				background: rgba(20, 153, 253, 0.6);
+			}
+		}
+	}
+
+	.evenRow {
+		background: rgba(0, 8, 59, 0.68);
+		height: 29px;
+	}
+
+	.oddRow {
+		background: rgba(24, 66, 142, 0.4);
+		height: 29px;
+	}
+}
+
+.peripheralAnalysis {
+	.title {
+		// background: url(iocoss/datai/screen/1600033481625178112/images/area-query-tit-bg.png);
+		height: 44px;
+		color: #fff;
+		line-height: 44px;
+		padding-left: 12px;
+	}
+	.content {
+		padding: 12px;
+	}
+
+	:global {
+		.ant-tabs-content-holder {
+			margin-top: 12px;
+		}
+		.ant-radio-group {
+			width: 290px;
+			height: 30px;
+			background: #031860;
+			box-shadow: inset 0px -1px 8px 0px #000931;
+			border: 1px solid #112eb6;
+			box-sizing: border-box;
+			padding: 3px;
+			display: flex;
+			justify-content: space-around;
+			white-space: nowrap;
+
+			.ant-radio-button-wrapper {
+				width: 100px;
+				text-align: center;
+				border: none;
+				background: none;
+				color: #ffffff;
+				height: 22px;
+				line-height: 22px;
+				padding: 0 8px;
+				&:not(:first-child):before {
+					display: none;
+				}
+				&.ant-radio-button-wrapper-checked {
+					background: linear-gradient(93deg, #08b6ff 0%, #028bff 100%);
+					border-radius: 1px;
+				}
+			}
+		}
+	}
+}
