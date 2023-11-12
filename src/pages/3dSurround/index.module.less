@@ -1,0 +1,101 @@
+.cell {
+	width: 131px;
+	height: 75px;
+
+	position: absolute;
+	color: #fff;
+	font-size: 22px;
+
+	background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+	z-index: 3;
+	/*动画执行一次所需时间*/
+	animation-duration: 10s, 10s, 20s;
+	/*动画以何种运行轨迹完成一个周期*/
+	animation-timing-function: cubic-bezier(0.36, 0, 0.64, 1);
+	/*动画播放次数,无线循环播放*/
+	animation-iteration-count: infinite;
+	/*是否轮流反向播放动画 alternate:正向播放*/
+	animation-direction: alternate;
+	animation-name: animX, animY, scale;
+
+	.nameBackground {
+		background: url("./img/elebg.png") no-repeat;
+		width: 134px;
+		height: 44px;
+		text-align: center;
+
+		span {
+			white-space: nowrap;
+			height: 20px;
+			font-size: 14px;
+			font-family: PingFangSC-Medium, PingFang SC;
+			font-weight: 500;
+			color: #ffffff;
+			line-height: 20px;
+			background: linear-gradient(180deg, #ffffff 0%, #88b2ff 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+
+	.desc {
+		img {
+            display: inline-block;
+		}
+
+		span {
+			height: 36px;
+			font-size: 22px;
+			font-family: din;
+			font-weight: bold;
+			color: #ffffff;
+			line-height: 36px;
+			text-shadow: 0px 2px 4px rgba(9, 20, 144, 0.42);
+			background: linear-gradient(180deg, #ffffff 0%, #53acf6 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+}
+
+.center {
+	width: 101px;
+	height: 94px;
+	background: url("./img/center.png") no-repeat;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@keyframes animX {
+	0% {
+		left: 0px;
+	}
+	100% {
+		left: 480px;
+	}
+}
+@keyframes animY {
+	0% {
+		top: 0px;
+	}
+	100% {
+		top: 200px;
+	}
+}
+@keyframes scale {
+	0% {
+		transform: scale(0.4);
+		z-index: 0;
+	}
+	50% {
+		transform: scale(1);
+		z-index: 3;
+	}
+	100% {
+		transform: scale(0.5);
+		z-index: 0;
+	}
+}

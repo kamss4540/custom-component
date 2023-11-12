@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Com from "./pages/PeripheralAnalysis";
+import Com from "./pages/3dSurround";
 // import Com from "./component/VideoPlayer";
 import mockData from "./pages/IndustryCoverage/mockData";
 import $ from "jquery";
@@ -15,8 +15,8 @@ function App() {
 	return (
 		<div
 			style={{
-				width: 1080,
-				height: 400,
+				width: 601,
+				height: 311,
 				border: "1px solid red",
 				position: "absolute",
 				left: 100,
