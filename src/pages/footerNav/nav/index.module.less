@@ -1,0 +1,105 @@
+.layout {
+	.nav {
+		display: inline-block;
+		height: 44px;
+		color: #abccff;
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		font-family: YouSheBiaoTiHei;
+		font-size: 28px;
+		text-shadow: 0px 0px 8px #011a28;
+		text-align: center;
+		cursor: pointer;
+
+		&.active {
+			color: #fff;
+		}
+
+		&.type_5 {
+			width: 171px;
+
+			&:not(:first-child) {
+				margin-left: -8px;
+			}
+
+			&.index_0 {
+				background-image: url("../image/5d1.png");
+				&.active {
+					background-image: url("../image/5a1.png");
+				}
+			}
+
+			&.index_1 {
+				background-image: url("../image/5d2.png");
+
+				&.active {
+					background-image: url("../image/5a2.png");
+				}
+			}
+
+			&.index_2 {
+				background-image: url("../image/5d3.png");
+
+				&.active {
+					background-image: url("../image/5a3.png");
+				}
+			}
+
+			&.index_3 {
+				background-image: url("../image/5d4.png");
+
+				&.active {
+					background-image: url("../image/5a4.png");
+				}
+			}
+
+			&.index_4 {
+				background-image: url("../image/5d5.png");
+
+				&.active {
+					background-image: url("../image/5a5.png");
+				}
+			}
+		}
+
+		&.type_4 {
+			&.index_0 {
+				width: 205px;
+				background-image: url("../image/4d1.png");
+				&.active {
+					background-image: url("../image/4a1.png");
+				}
+			}
+
+			&.index_1 {
+				width: 213px;
+				margin-left: -8px;
+				margin-right: 9px;
+				background-image: url("../image/4d2.png");
+
+				&.active {
+					background-image: url("../image/4a2.png");
+				}
+			}
+
+			&.index_2 {
+				width: 213px;
+				background-image: url("../image/4d3.png");
+
+				&.active {
+					background-image: url("../image/4a3.png");
+				}
+			}
+
+			&.index_3 {
+				width: 205px;
+				margin-left: -8px;
+				background-image: url("../image/4d4.png");
+
+				&.active {
+					background-image: url("../image/4a4.png");
+				}
+			}
+		}
+	}
+}
