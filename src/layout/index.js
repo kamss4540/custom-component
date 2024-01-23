@@ -6,11 +6,14 @@ import {
 import { Breadcrumb, Layout, Menu } from "antd";
 import React from "react";
 import Sider from "./Sider";
+import router from "@/route";
 
 const { Header, Content } = Layout;
-const items1 = ["1", "2", "3"].map((key) => ({
-	key,
-	label: `nav ${key}`,
+
+const items = router.routes.map((item) => ({
+	key: item.path,
+	label: item.name,
+	extra: item,
 }));
 const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
 	(icon, index) => {
@@ -32,6 +35,11 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
 
 const MyLayout = (props) => {
 	const { children } = props;
+
+	const onHeaderClick = (e) => {
+		console.log("onHeaderClick=>", e.item);
+	};
+
 	return (
 		<Layout style={{ height: "100%" }}>
 			<Header className="header">
@@ -40,7 +48,8 @@ const MyLayout = (props) => {
 					theme="dark"
 					mode="horizontal"
 					defaultSelectedKeys={["2"]}
-					items={items1}
+					items={items}
+					onClick={onHeaderClick}
 				/>
 			</Header>
 			<Layout>
