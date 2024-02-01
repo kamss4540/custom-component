@@ -1,0 +1,67 @@
+@radius: 160px; // 半径
+@height: 9px; // 小方块的高度
+@divNum: 32; // 小方块的个数
+@time: 6s; // 转一圈的时间
+.clock_container {
+	position: relative;
+
+	.mixin {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		top: calc(@radius / 2);
+		left: calc(@radius / 2);
+
+		&::before {
+			content: "";
+			display: block;
+			width: 7px;
+			height: @height;
+			background-color: #fffd52;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	.loop (@count) when (@count >= 0) {
+		.loop(@count - 1);
+
+		.dot@{count} {
+			.mixin();
+			transform: rotate(calc(360deg / @divNum * @count))
+				translateY(calc(@radius / 2 - @height / 2));
+			&::before {
+				animation: loading @time infinite linear;
+				animation-delay: calc(@time / 32 * (@divNum - @count));
+			}
+		}
+
+		.dot@{count} when (@count < 19) and (@count > 5 ) {
+			&::before {
+				background-color: #1b9cfc;
+			}
+		}
+	}
+
+	.loop(@divNum);
+}
+
+@keyframes loading {
+	0% {
+		height: 9px;
+		width: 7px;
+	}
+	3% {
+		height: 12px;
+		width: 10px;
+	}
+	9% {
+		height: 9px;
+		width: 7px;
+	}
+	100% {
+		height: 9px;
+		width: 7px;
+	}
+}

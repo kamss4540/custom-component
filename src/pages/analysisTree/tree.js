@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import styles from "./index.module.less";
 
 const AnalysisTree = (props) => {
-	const { data, selectedValueKey, defaultSelectedKey } = props;
+	const { data, selectedValueKey } = props;
 
 	const setStoreData = window.setStoreData ? window.setStoreData : () => {};
 
@@ -11,7 +11,7 @@ const AnalysisTree = (props) => {
 	const [expandedKeys, setExpandedKeys] = useState([]);
 
 	const treeData = useMemo(() => {
-		return getTree(data);
+		return data ? getTree(data) : [];
 	}, [data]);
 
 	useEffect(() => {
@@ -31,12 +31,15 @@ const AnalysisTree = (props) => {
 			};
 			loopGetKey(treeData[0].children[0].children, keys);
 			const path = getCurrentModel(keys);
+			keys = ["0-0", ...keys];
+			titles = [treeData[0].children[0].title, ...titles];
 			setCheckedKeys(keys);
-			setExpandedKeys(keys);
-			setStoreData(defaultSelectedKey, { path, selectedValue: keys });
+			setExpandedKeys(["0", ...keys]);
+			setStoreData(selectedValueKey, { path, selectedValue: titles });
 		}
 	}, [treeData]);
 
+	// 选中节点时触发
 	const onCheck = (checkedKeysValue, info) => {
 		const { checked, node, checkedNodes } = info;
 		let _checkedKeys = [];
@@ -51,6 +54,7 @@ const AnalysisTree = (props) => {
 					itemParts[1] === compareParts[1]
 				);
 			});
+			// _checkedKeys = [...new Set(_checkedKeys)];
 			// 选中某个节点时，展开这个节点以及他的所有子节点
 			const { children } = node;
 			let _expandedKeys = [key, ...expandedKeys];
@@ -64,6 +68,33 @@ const AnalysisTree = (props) => {
 		} else {
 			_checkedKeys = checkedKeysValue;
 		}
+
+		console.info("_checkedKeys=>", _checkedKeys);
+
+		// 获取_checkedKeys对应的title
+		const getTitlesFromtreeByKeys = (tree, keys) => {
+			let titles = [];
+			const loopGetTitle = (_tree) => {
+				_tree.forEach((item) => {
+					keys.forEach((j) => {
+						if (item.key === j) {
+							titles.push(item.title);
+						}
+					});
+					if (item.children) {
+						loopGetTitle(item.children);
+					}
+				});
+			};
+			loopGetTitle(tree);
+			return titles;
+		};
+
+		console.info(
+			"getTitlesFromtreeByKeys=>",
+			getTitlesFromtreeByKeys(treeData, _checkedKeys)
+		);
+
 		setCheckedKeys(_checkedKeys);
 		const path = getCurrentModel(_checkedKeys);
 		const selectedValue = checkedNodes.map((item) => item.title);
@@ -115,8 +146,16 @@ export default AnalysisTree;
 const getTree = (obj) => {
 	const loopObj = (obj, pid) => {
 		let arr = null;
-
-		if (
+		// key列表
+		const keys = Object.keys(obj);
+		if (keys.length === 0) {
+			// 如果key列表为空,返回空数组
+			return [];
+		} else if (keys.every((item) => isAlphabeticOnly(item))) {
+			// 如果对象的key都是字母,找到value是对象的属性,加入循环
+			const key = keys.find((key) => obj[key] instanceof Object);
+			return loopObj(obj[key], pid);
+		} else if (
 			obj instanceof Object &&
 			Object.keys(obj).some((item) => !containsChinese(item))
 		) {
@@ -146,28 +185,7 @@ const getTree = (obj) => {
 				}
 
 				if (Object.keys(value).length > 0) {
-					if (key === "喷射火模型") {
-						node.children = [
-							{
-								title: "三度烧伤区",
-								// key: "三度烧伤区",
-								...colorArr["三度烧伤区"],
-								key: node.key + "-0",
-							},
-							{
-								title: "二度烧伤区",
-								// key: "二度烧伤区",
-								...colorArr["二度烧伤区"],
-								key: node.key + "-1",
-							},
-							{
-								title: "一度烧伤区",
-								// key: "一度烧伤区",
-								...colorArr["一度烧伤区"],
-								key: node.key + "-2",
-							},
-						];
-					} else if (typeof value !== "number") {
+					if (typeof value !== "number") {
 						node.children = loopObj(value, node.key);
 					}
 				}
@@ -186,6 +204,18 @@ const containsChinese = (str) => {
 	// 使用 test 方法检查字符串是否包含中文字符
 	return chineseRegExp.test(str);
 };
+
+const isNumericAndColonOnly = (inputString) => {
+	// 使用正则表达式匹配只包含数字和冒号的字符串
+	var regex = /^[0-9:]+$/;
+	return regex.test(inputString);
+};
+
+function isAlphabeticOnly(inputString) {
+	// 使用正则表达式匹配只包含字母的字符串
+	var regex = /^[a-zA-Z]+$/;
+	return regex.test(inputString);
+}
 
 // 树节点图标的颜色
 let colorArr = {
@@ -211,7 +241,6 @@ let colorArr = {
 	},
 	人员伤害: {
 		color: "rgba(255, 255, 0, 0.8)",
-		zIndex: 40,
 	},
 	"人员灾损:三级:死亡": {
 		color: "rgba(255, 0, 0, 0.8)",

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import FooterNav from "@/pages/footerNav";
 import AnalysisTree from "@/pages/analysisTree";
+import Pie from "@/pages/pie";
 
 const router = createBrowserRouter([
 	{
@@ -31,6 +32,11 @@ const router = createBrowserRouter([
 				path: "analysisTree",
 				name: "研判分析树",
 				element: <AnalysisTree />,
+			},
+			{
+				path: "pie",
+				name: "一个圆",
+				element: <Pie />,
 			},
 		],
 	},
