@@ -1,29 +1,26 @@
-import React, { useEffect, useCallback, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./index.module.less";
 
-const App = (props) => {
+const App = () => {
 	const list = [
 		{
-			name: "非居民用报警器",
-			value: "188 处",
-			iconPath: "./img/编组_16.png",
+			title: "应急能力",
+			subtitle: "应急管理",
+			key: "1",
 		},
 		{
-			name: "调压室监控系统",
-			value: "188 处",
-			iconPath: "./img/编组_16.png",
+			title: "危险性",
+			subtitle: "突发事件",
+			key: "2",
 		},
 		{
-			name: "激光甲烷遥测系统",
-			value: "188 处",
-			iconPath: "./img/编组_16.png",
-		},
-		{
-			name: "地下井室官网哨兵",
-			value: "188 处",
-			iconPath: "./img/编组_16.png",
+			title: "脆弱性",
+			subtitle: "承灾载体",
+			key: "3",
 		},
 	];
+
+	const [active, setActive] = useState("1");
 
 	useEffect(() => {
 		let items = document.getElementsByClassName(styles.cell);
@@ -40,6 +37,10 @@ const App = (props) => {
 			items[i].style["animation-delay"] = val;
 		}
 	}, []);
+
+	const onClick = (key) => {
+		setActive(key);
+	};
 
 	const onMouseOver = () => {
 		let items = document.getElementsByClassName(styles.cell);
@@ -60,26 +61,25 @@ const App = (props) => {
 	};
 
 	return (
-		<div>
-			<div className={styles.center}></div>
-			<div>
-				{list.map((item, index) => (
+		<div className={styles.container}>
+			{list.map((item, index) => (
+				<div
+					key={item.key}
+					className={`${styles.cell} ${styles["dot" + index]} ${
+						item.key === active ? styles.active : ""
+					}`}
+					onMouseOver={onMouseOver}
+					onMouseOut={onMouseOut}
+				>
 					<div
-						key={index}
-						className={styles.cell}
-						onMouseOver={onMouseOver}
-						onMouseOut={onMouseOut}
+						className={styles.card}
+						onClick={() => onClick(item.key)}
 					>
-						<div className={styles.nameBackground}>
-							<span>{item.name}</span>
-						</div>
-						<div className={styles.desc}>
-							<img src={item.iconPath} alt="" />
-							<span>{item.value}</span>
-						</div>
+						<div className={styles.title}>{item.title}</div>
+						<div className={styles.subtitle}>{item.subtitle}</div>
 					</div>
-				))}
-			</div>
+				</div>
+			))}
 		</div>
 	);
 };

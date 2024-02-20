@@ -4,7 +4,7 @@ import Com from "./pages/3dSurround";
 import mockData from "./pages/IndustryCoverage/mockData";
 import $ from "jquery";
 import Layout from "@/layout";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider, BrowserRouter } from "react-router-dom";
 import router from "@/route";
 import "./App.css";
 
@@ -17,9 +17,11 @@ function App() {
 	}, []);
 
 	return (
-		<Layout>
-			<RouterProvider router={router} />
-		</Layout>
+		// <BrowserRouter>
+			<Layout>
+				<RouterProvider router={router} />
+			</Layout>
+		// </BrowserRouter>
 	);
 
 	return (

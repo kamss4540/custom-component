@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import FooterNav from "@/pages/footerNav";
 import AnalysisTree from "@/pages/analysisTree";
 import Pie from "@/pages/pie";
+import Pie3 from "@/pages/3pie";
 
 const router = createBrowserRouter([
 	{
@@ -12,16 +13,16 @@ const router = createBrowserRouter([
 				{/* <Link to="about">About Us</Link> */}
 			</div>
 		),
-		isMenu: false,
+		hidden: true,
 	},
 	{
 		path: "about",
 		element: <div>About</div>,
-		isMenu: false,
+		hidden: true,
 	},
 	{
 		path: "h1",
-		name: "nav 1",
+		name: "一类",
 		children: [
 			{
 				path: "footerNav",
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
 				path: "pie",
 				name: "一个圆",
 				element: <Pie />,
+			},
+			{
+				path: "3pie",
+				name: "三个圆",
+				element: <Pie3 />,
 			},
 		],
 	},

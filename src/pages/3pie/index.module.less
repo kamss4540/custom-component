@@ -1,0 +1,162 @@
+.container {
+	position: relative;
+}
+
+@mixWidth: 95px;
+@mixHeight: 93px;
+
+.card {
+	position: relative;
+	width: @mixWidth;
+	height: @mixHeight;
+	background-image: url("./image/编组4备份2.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	transform: translate(-50%, -50%);
+	cursor: pointer;
+
+	.title {
+		position: absolute;
+		left: 18px;
+		top: 34px;
+		height: 17px;
+		font-size: 12px;
+		font-family: PingFangSC, PingFang SC;
+		font-weight: 600;
+		color: #04ff9c;
+		line-height: 17px;
+		letter-spacing: 1px;
+		// text-shadow: 0px 1px 1px #00517f;
+		background: linear-gradient(180deg, #ff8181 0%, #ff0000 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.subtitle {
+		position: absolute;
+		left: 20px;
+		top: 52px;
+		width: 61px;
+		height: 16px;
+		font-size: 11px;
+		font-family: PingFangSC, PingFang SC;
+		font-weight: 500;
+		color: #ffffff;
+		line-height: 16px;
+		text-shadow: 0px 1px 1px #003452;
+	}
+}
+
+.dot {
+	width: 0;
+	height: 0;
+	position: absolute;
+
+	&.active {
+		.card {
+			width: 105px;
+			height: 106px;
+			background-image: url("./image/编组4备份2(1).png");
+
+			.title {
+				font-size: 16px;
+			}
+
+			.subtitle {
+				font-size: 12px;
+				left: 28px;
+			}
+		}
+
+		&.dot1,
+		&.dot2 {
+			.card {
+				.title {
+					left: 27px;
+				}
+			}
+		}
+	}
+}
+
+.dot0 {
+	.dot();
+	// left: calc(@mixWidth / 2);
+	// top: calc(@mixHeight / 2);
+}
+
+.dot1 {
+	.dot();
+	// left: calc(@mixWidth + 89px + @mixWidth / 2);
+	// top: calc(28px + @mixHeight / 2);
+
+	.card {
+		.title {
+			left: 22px;
+		}
+	}
+}
+
+.dot2 {
+	.dot();
+	// left: calc(@mixWidth + 282px + @mixWidth / 2);
+	// top: calc(1px + @mixHeight / 2);
+
+	.card {
+		.title {
+			left: 22px;
+		}
+	}
+}
+
+.cell {
+	position: absolute;
+	background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+	z-index: 3;
+	/*动画执行一次所需时间*/
+	animation-duration: 10s, 10s, 20s;
+	/*动画以何种运行轨迹完成一个周期*/
+	animation-timing-function: cubic-bezier(0.36, 0, 0.64, 1);
+	/*动画播放次数,无线循环播放*/
+	animation-iteration-count: infinite;
+	/*是否轮流反向播放动画 alternate:正向播放*/
+	animation-direction: alternate;
+	animation-name: animX, animY, scale;
+}
+
+/*鼠标进入停止*/
+.paused {
+	animation-play-state: paused;
+}
+
+@keyframes animX {
+	0% {
+		left: 0px;
+	}
+	100% {
+		left: 370px;
+	}
+}
+@keyframes animY {
+	0% {
+		top: 0px;
+	}
+	100% {
+		top: 50px;
+	}
+}
+@keyframes scale {
+	0% {
+		transform: scale(0.5);
+		z-index: 0;
+	}
+	50% {
+		transform: scale(1);
+		z-index: 3;
+	}
+	100% {
+		transform: scale(0.6);
+		z-index: 0;
+	}
+}

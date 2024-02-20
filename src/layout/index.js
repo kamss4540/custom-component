@@ -4,17 +4,19 @@ import {
 	UserOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu } from "antd";
-import React from "react";
+import React, { useMemo } from "react";
 import Sider from "./Sider";
 import router from "@/route";
 
 const { Header, Content } = Layout;
 
-const items = router.routes.map((item) => ({
-	key: item.path,
-	label: item.name,
-	extra: item,
-}));
+const items = router.routes
+	.filter((item) => !item.hidden)
+	.map((item) => ({
+		key: item.path,
+		label: item.name,
+		extra: item,
+	}));
 const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
 	(icon, index) => {
 		const key = String(index + 1);
@@ -40,6 +42,16 @@ const MyLayout = (props) => {
 		console.log("onHeaderClick=>", e.item);
 	};
 
+	const item3 = useMemo(() => {
+		return items[0].extra.children.map((item) => ({
+			key: item.path,
+			label: item.name,
+			extra: item,
+		}));
+	}, [items]);
+
+	console.log("items3=>", item3);
+
 	return (
 		<Layout style={{ height: "100%" }}>
 			<Header className="header">
@@ -47,24 +59,13 @@ const MyLayout = (props) => {
 				<Menu
 					theme="dark"
 					mode="horizontal"
-					defaultSelectedKeys={["2"]}
+					defaultSelectedKeys={[items[0].key]}
 					items={items}
 					onClick={onHeaderClick}
 				/>
 			</Header>
 			<Layout>
-				<Sider width={200} className="site-layout-background">
-					<Menu
-						mode="inline"
-						defaultSelectedKeys={["1"]}
-						defaultOpenKeys={["sub1"]}
-						style={{
-							height: "100%",
-							borderRight: 0,
-						}}
-						items={items2}
-					/>
-				</Sider>
+				<Sider data={items[0].extra.children} />
 				<Layout
 					style={{
 						padding: "0 24px 24px",
@@ -75,7 +76,7 @@ const MyLayout = (props) => {
 							margin: "16px 0",
 						}}
 					>
-						<Breadcrumb.Item>Home</Breadcrumb.Item>
+						<Breadcrumb.Item>Home~</Breadcrumb.Item>
 						<Breadcrumb.Item>List</Breadcrumb.Item>
 						<Breadcrumb.Item>App</Breadcrumb.Item>
 					</Breadcrumb>
