@@ -1,0 +1,113 @@
+.container {
+	position: relative;
+	width: 518px;
+	height:130px;
+	border: 1px solid red;
+}
+
+@mixWidth: 95px;
+@mixHeight: 93px;
+
+.card {
+	position: relative;
+	width: @mixWidth;
+	height: @mixHeight;
+	background-image: url("./image/编组4备份2.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	// transform: translate(-50%, -50%);
+	cursor: pointer;
+
+	.title {
+		position: absolute;
+		left: 18px;
+		top: 34px;
+		height: 17px;
+		font-size: 12px;
+		font-family: PingFangSC, PingFang SC;
+		font-weight: 600;
+		color: #04ff9c;
+		line-height: 17px;
+		letter-spacing: 1px;
+		// text-shadow: 0px 1px 1px #00517f;
+		background: linear-gradient(180deg, #ff8181 0%, #ff0000 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.subtitle {
+		position: absolute;
+		left: 20px;
+		top: 52px;
+		width: 61px;
+		height: 16px;
+		font-size: 11px;
+		font-family: PingFangSC, PingFang SC;
+		font-weight: 500;
+		color: #ffffff;
+		line-height: 16px;
+		text-shadow: 0px 1px 1px #003452;
+	}
+}
+
+.dot {
+	width: 95px;
+	height: 93px;
+	position: absolute;
+
+	&.active {
+		.card {
+			width: 105px;
+			height: 106px;
+			background-image: url("./image/编组4备份2(1).png");
+
+			.title {
+				font-size: 16px;
+			}
+
+			.subtitle {
+				font-size: 12px;
+				left: 28px;
+			}
+		}
+
+		&.dot1,
+		&.dot2 {
+			.card {
+				.title {
+					left: 27px;
+				}
+			}
+		}
+	}
+}
+
+.dot0 {
+	.dot();
+	// left: calc(@mixWidth / 2);
+	// top: calc(@mixHeight / 2);
+}
+
+.dot1 {
+	.dot();
+	// left: calc(@mixWidth + 89px + @mixWidth / 2);
+	// top: calc(28px + @mixHeight / 2);
+
+	.card {
+		.title {
+			left: 22px;
+		}
+	}
+}
+
+.dot2 {
+	.dot();
+	// left: calc(@mixWidth + 282px + @mixWidth / 2);
+	// top: calc(1px + @mixHeight / 2);
+
+	.card {
+		.title {
+			left: 22px;
+		}
+	}
+}

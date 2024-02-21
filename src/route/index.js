@@ -3,6 +3,7 @@ import FooterNav from "@/pages/footerNav";
 import AnalysisTree from "@/pages/analysisTree";
 import Pie from "@/pages/pie";
 import Pie3 from "@/pages/3pie";
+import Rotation from "@/pages/rotation";
 
 const router = createBrowserRouter([
 	{
@@ -43,6 +44,11 @@ const router = createBrowserRouter([
 				path: "3pie",
 				name: "三个圆",
 				element: <Pie3 />,
+			},
+			{
+				path: "rotation",
+				name: "旋转",
+				element: <Rotation />,
 			},
 		],
 	},
