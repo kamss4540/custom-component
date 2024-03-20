@@ -4,6 +4,7 @@ import AnalysisTree from "@/pages/analysisTree";
 import Pie from "@/pages/pie";
 import Pie3 from "@/pages/3pie";
 import Rotation from "@/pages/rotation";
+import Dnd from '@/pages/dnd'
 
 const router = createBrowserRouter([
 	{
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
 				path: "rotation",
 				name: "旋转",
 				element: <Rotation />,
+			},
+			{
+				path: "dnd",
+				name: "拖拽",
+				element: <Dnd />,
 			},
 		],
 	},

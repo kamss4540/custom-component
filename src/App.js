@@ -17,11 +17,9 @@ function App() {
 	}, []);
 
 	return (
-		// <BrowserRouter>
 			<Layout>
 				<RouterProvider router={router} />
 			</Layout>
-		// </BrowserRouter>
 	);
 
 	return (
