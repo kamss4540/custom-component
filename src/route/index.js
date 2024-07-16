@@ -5,6 +5,7 @@ import Pie from "@/pages/pie";
 import Pie3 from "@/pages/3pie";
 import Rotation from "@/pages/rotation";
 import Dnd from '@/pages/dnd'
+import Rbd from '@/pages/rbd'
 
 const router = createBrowserRouter([
 	{
@@ -55,6 +56,11 @@ const router = createBrowserRouter([
 				path: "dnd",
 				name: "拖拽",
 				element: <Dnd />,
+			},
+			{
+				path: "rbd",
+				name: "react-beautiful-dnd",
+				element: <Rbd />,
 			},
 		],
 	},
